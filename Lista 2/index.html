@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8">
+
+    <meta name="description" content="Strona na drugie laboratorium .NET">
+    <meta name="keywords" content="HTML, .NET, Studia">
+    <meta name="author" content="Tomasz Chojnacki">
+    <meta name="copyright" content="Tomasz Chojnacki">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona .NET 2</title>
+  </head>
+  <body>
+    <header>
+      <h1>Stronka</h1>
+    </header>
+    <nav>
+      <h2>Spis treści</h2>
+      <ol>
+        <li>
+          <a href="#section-text-1">Przejdź do pierwszej sekcji tekstowej</a>
+        </li>
+        <li>
+          <a href="#section-symbols">Przejdź do sekcji znaków</a>
+          <ul>
+            <li>
+              <a href="#symbol-list">
+                Przejdź bezpośrednio do <strong>listy</strong> znaków
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#section-nested">Przejdź do sekcji z zagnieżdżoną listą</a>
+          <ul>
+            <li>
+              <a href="#nested-list">
+                Przejdź bezpośrednio do <strong>listy</strong> zagnieżdżonej
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#section-tables">Przejdź do sekcji z tabelami</a>
+          <ul>
+            <li>
+              <a href="#table">
+                Przejdź bezpośrednio do <strong>tabeli</strong>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#section-form">Przejdź do sekcji z formularzem</a>
+          <ul>
+            <li>
+              <a href="#form">
+                Przejdź bezpośrednio do <strong>formularza</strong>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#section-defs">Przejdź do sekcji z definicjami</a>
+          <ul>
+            <li>
+              <a href="#defs-list">
+                Przejdź bezpośrednio do <strong>definicji</strong>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#section-text-2">Przejdź do drugiej sekcji tekstowej</a>
+        </li>
+        <li>
+          <a href="#footer">Przejdź do stopki </a>
+        </li>
+      </ol>
+    </nav>
+    <main id="section-text-1">
+      <h2>Sekcja z tekstem</h2>
+      <p>
+        Lorem ipsum <strong>dolor sit amet</strong> consectetur
+        <small>adipisicing</small> elit. <em>Tempora, magni temporibus</em> quam
+        ipsam soluta dolorum eos maxime, laborum, nemo alias
+        <del>excepturi cumque dignissimos</del> saepe earum nisi modi ex nostrum
+        praesentium?
+      </p>
+      <p>
+        <mark>Magnam aperiam ut dolorem cupiditate</mark> voluptatem accusantium
+        perspiciatis vel laudantium praesentium commodi, eum neque beatae quam
+        et deleniti nisi, <ins>quaerat eligendi</ins> fuga a vitae voluptas
+        obcaecati fugiat numquam cum! Et!
+      </p>
+      <p>
+        <sub>Nihil dolores commodi</sub> omnis rerum odio, vero error obcaecati
+        eius nesciunt saepe vitae <sup>necessitatibus corporis</sup>, explicabo
+        amet minus blanditiis debitis culpa earum dolore, provident perferendis
+        laborum ab. Hic, veritatis consectetur!
+      </p>
+    </main>
+    <section id="section-symbols">
+      <h2>Ważne równania</h2>
+      <ul id="symbol-list">
+        <li>&nabla; &middot; <b>E</b> = &rho; &epsilon;<sub>0</sub></li>
+        <li>E = mc<sup>2</sup></li>
+        <li>
+          &Integral;<sub>a</sub><sup>b</sup> f(x) dx = lim<sub
+            >n &rightarrow; &infin;</sub
+          >
+          &Sum;<sup>n</sup><sub>i = 1</sub> &Delta;x &middot; f(x<sub>i</sub>)
+        </li>
+      </ul>
+    </section>
+    <section id="section-nested">
+      <h2>Sekcja z zagnieżdżoną listą</h2>
+      <p>Wybrane przestrzenie nazw .NET:</p>
+      <ul id="nested-list">
+        <li>
+          Microsoft
+          <ul>
+            <li>
+              CSharp
+              <ul>
+                <li>RuntimeBinder</li>
+              </ul>
+            </li>
+            <li>
+              VisualBasic
+              <ul>
+                <li>CompilerServices</li>
+                <li>FileIO</li>
+              </ul>
+            </li>
+            <li>
+              Win32
+              <ul>
+                <li>SafeHandles</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          System
+          <ul>
+            <li>
+              Collections
+              <ul>
+                <li>Concurrent</li>
+                <li>Generic</li>
+                <li>Immutable</li>
+                <li>ObjectModel</li>
+                <li>Specialized</li>
+              </ul>
+            </li>
+            <li>
+              Runtime
+              <ul>
+                <li>Loader</li>
+                <li>Remoting</li>
+                <li>
+                  Serialization
+                  <ul>
+                    <li>
+                      Formatters
+                      <ul>
+                        <li>Binary</li>
+                      </ul>
+                    </li>
+                    <li>Json</li>
+                  </ul>
+                </li>
+                <li>Versioning</li>
+              </ul>
+            </li>
+            <li>
+              Text
+              <ul>
+                <li>
+                  Encodings
+                  <ul>
+                    <li>Web</li>
+                  </ul>
+                </li>
+                <li>
+                  Json
+                  <ul>
+                    <li>Nodes</li>
+                    <li>
+                      Serialization
+                      <ul>
+                        <li>Metadata</li>
+                      </ul>
+                    </li>
+                    <li>RegularExpressions</li>
+                    <li>Unicode</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <section id="section-tables">
+      <h2>Sekcja z tabelami</h2>
+      <h3>Oceny</h3>
+      <table id="table" border="1">
+        <thead>
+          <tr>
+            <th rowspan="2">Nazwa</th>
+            <th>Przeznaczenie</th>
+            <th>Rodzaj</th>
+            <th>Status</th>
+            <th>Początek zapisów</th>
+            <th>Koniec zapisów</th>
+            <th rowspan="2">Akcja</th>
+          </tr>
+          <tr>
+            <th colspan="3">Zapisy powiązane</th>
+            <th colspan="2">Początek zapisów słuchacza</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2">SJO Kursy Wakacyjne</td>
+            <td>Ogólnouczelniane</td>
+            <td>Właściwe</td>
+            <td>Aktywne</td>
+            <td>2022-06-27</td>
+            <td>2022-07-11</td>
+            <td rowspan="2"><button>Zapisz</button></td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+            <td colspan="2">2022-06-27</td>
+          </tr>
+          <tr>
+            <td rowspan="2">W04N Zapisy Letnie</td>
+            <td>Wydziałowe</td>
+            <td>Właściwe</td>
+            <td>Aktywne</td>
+            <td>2022-02-17</td>
+            <td>2022-02-22</td>
+            <td rowspan="2"><button>Zapisz</button></td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+            <td colspan="2">2022-06-27</td>
+          </tr>
+          <tr>
+            <td rowspan="2">PWr Korekty Letnie</td>
+            <td>Ogólnouczelniane</td>
+            <td>Korekty</td>
+            <td>Zakończone</td>
+            <td>2022-02-24</td>
+            <td>2022-02-25</td>
+            <td rowspan="2"><button disabled>Zapisz</button></td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+            <td colspan="2">2022-02-24</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="7">
+              &LeftTriangle; 1 2 3 &RightTriangle;
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+      <h3>Modyfikacja</h3>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>A</th>
+            <th colspan="3">
+              &lt;header&gt;
+            </th>
+            <th>B</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>C</td>
+            <td>D</td>
+            <td>E</td>
+            <td rowspan="2" colspan="2">&commat;</td>
+          </tr>
+          <tr>
+            <td rowspan="2" colspan="2">
+              <img
+                width="200"
+                src="https://zooart.com.pl/blog/wp-content/uploads/2020/06/kapibara.jpeg"
+                alt="Kapibara">
+            </td>
+            <td>F</td>
+          </tr>
+          <tr>
+            <td>G</td>
+            <td>H</td>
+            <td>I</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>J</td>
+            <td>K</td>
+            <td colspan="2"><a href="https://pwr.edu.pl/">Link</a></td>
+            <td>L</td>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+    <section id="section-form">
+      <h2>Sekcja z formularzem</h2>
+      <h3>Ustawienia konta</h3>
+      <form method="get" action="index.html" id="form">
+        <hr>
+        <input type="hidden" name="hidden" value="field">
+        <fieldset>
+          <legend>Logowanie</legend>
+          <label for="login">Login:</label>
+          <input type="text" id="login" name="login">
+          <br>
+          <label for="password">Hasło:</label>
+          <input type="password" id="password" name="password">
+        </fieldset>
+        <fieldset>
+          <legend>Profil</legend>
+          <label for="displayname">Nazwa wyświetlana:</label>
+          <input type="text" id="displayname" name="displayname">
+          <br>
+          <label for="content">Opis:</label> <br>
+          <textarea id="content" name="content" cols="60" rows="10"></textarea>
+          <br>
+          <label for="avatar">Zdjęcie profilowe:</label>
+          <input type="file" id="avatar" name="avatar">
+          <br>
+          <label for="color">Tło profilu:</label>
+          <input type="color" id="color" name="color">
+        </fieldset>
+        <fieldset>
+          <legend>Kontakt</legend>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email">
+          <br>
+          <label for="phone">Telefon:</label>
+          <input type="tel" id="phone" name="phone">
+          <br>
+          <label for="contact">
+            Preferowana forma kontaktu:
+            <select id="contact" name="contact">
+              <option value="email">Email</option>
+              <option value="phone">Telefon</option>
+            </select>
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>Prywatność</legend>
+          <label for="visible">
+            <input
+              type="radio"
+              id="visible"
+              name="visibility"
+              value="visible"
+           >
+            Profil widoczny dla wszystkich
+          </label>
+          <br>
+          <label for="private">
+            <input
+              type="radio"
+              id="private"
+              name="visibility"
+              value="private"
+           >
+            Profil widoczny tylko dla mnie
+          </label>
+        </fieldset>
+        <label for="rules">
+          <input type="checkbox" name="rules" id="rules">
+          Akceptuję regulamin
+        </label>
+        <br>
+        <input type="reset" value="Resetuj formularz">
+        <input type="submit" value="Wyślij!">
+        <hr>
+      </form>
+    </section>
+    <section id="section-defs">
+      <h2>Ważne definicje</h2>
+      <dl id="defs-list">
+        <dt>Kapibara</dt>
+        <dd>
+          rodzaj ssaka z podrodziny kapibar <em>(Hydrochoerinae)</em> w rodzinie
+          kawiowatych
+        </dd>
+
+        <dt>Kaczka</dt>
+        <dd>
+          nazwa określająca niektóre gatunki z rodziny kaczkowatych, podrodziny
+          kaczek
+        </dd>
+
+        <dt>Pies domowy</dt>
+        <dd>
+          udomowiony gatunek ssaka drapieżnego z rodziny psowatych, traktowany
+          przez niektóre ujęcia systematyczne za podgatunek wilka
+        </dd>
+      </dl>
+      <p>
+        <strong>Źródło:</strong>
+        <a
+          href="https://pl.wikipedia.org/wiki/Wikipedia:Strona_g%C5%82%C3%B3wna"
+          >Wikipedia</a
+        >
+      </p>
+    </section>
+    <section id="section-text-2">
+      <h2>Kolejna sekcja tekstowa</h2>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem,
+        velit quaerat quam quia vero iusto quod error eos quibusdam voluptates
+        recusandae eveniet, distinctio sunt eligendi necessitatibus blanditiis
+        asperiores aliquid repellendus.
+      </p>
+      <p>
+        Hic necessitatibus eum dolor amet accusamus optio fuga nisi, expedita
+        error in quasi quibusdam ipsam! Neque aspernatur fugit ut vel. Rerum
+        exercitationem alias ea similique, incidunt veritatis beatae quod quis!
+      </p>
+      <p>
+        Itaque error eveniet placeat amet accusamus, voluptatem consectetur
+        eligendi obcaecati recusandae repellat eos at blanditiis non eius, vero
+        maiores veniam quo, et autem exercitationem optio. Earum reiciendis est
+        commodi vitae?
+      </p>
+      <p>
+        Illum ullam nesciunt doloribus officia autem nemo blanditiis voluptatem
+        nulla enim praesentium illo, esse cupiditate veritatis recusandae,
+        obcaecati vero, minus provident ad eveniet. Quidem ex est totam, aut
+        excepturi consectetur!
+      </p>
+      <p>
+        Inventore illo id quo beatae eaque quisquam mollitia recusandae suscipit
+        deleniti quidem culpa, dolorum rem, non voluptatibus possimus facilis
+        vero eius? Quaerat, repellendus esse provident perferendis placeat
+        quisquam fugiat porro!
+      </p>
+      <p>
+        Hic necessitatibus eum dolor amet accusamus optio fuga nisi, expedita
+        error in quasi quibusdam ipsam! Neque aspernatur fugit ut vel. Rerum
+        exercitationem alias ea similique, incidunt veritatis beatae quod quis!
+      </p>
+      <p>
+        Itaque error eveniet placeat amet accusamus, voluptatem consectetur
+        eligendi obcaecati recusandae repellat eos at blanditiis non eius, vero
+        maiores veniam quo, et autem exercitationem optio. Earum reiciendis est
+        commodi vitae?
+      </p>
+      <p>
+        Illum ullam nesciunt doloribus officia autem nemo blanditiis voluptatem
+        nulla enim praesentium illo, esse cupiditate veritatis recusandae,
+        obcaecati vero, minus provident ad eveniet. Quidem ex est totam, aut
+        excepturi consectetur!
+      </p>
+      <p>
+        Inventore illo id quo beatae eaque quisquam mollitia recusandae suscipit
+        deleniti quidem culpa, dolorum rem, non voluptatibus possimus facilis
+        vero eius? Quaerat, repellendus esse provident perferendis placeat
+        quisquam fugiat porro!
+      </p>
+    </section>
+    <footer id="footer">
+      <h2>Stopka</h2>
+      <p>&copy; Tomasz Chojnacki</p>
+      <p><a href="#">Wróć na górę</a></p>
+    </footer>
+  </body>
+</html>

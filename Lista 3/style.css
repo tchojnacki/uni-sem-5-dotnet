@@ -1,0 +1,436 @@
+/* Ogólny wygląd strony */
+body {
+    font-size: 16px;
+    font-family: sans-serif;
+    background-color: #eeeeee;
+    color: #111111;
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 1rem;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+}
+
+.home-img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 2rem;
+}
+
+/* 1. Osadzanie reguł CSS */
+.class-in-external-stylesheet {
+    background-color: red;
+    color: black;
+}
+
+/* 2. Sposoby zmiany wielkości tekstu */
+.font-size-em {
+    font-size: 0.75em;
+}
+
+.font-size-px {
+    font-size: 25px;
+}
+
+.font-size-pt {
+    font-size: 15pt;
+}
+
+.font-size-percent {
+    font-size: 50%;
+}
+
+.font-size-large {
+    font-size: large;
+}
+
+.font-size-cm {
+    font-size: 1cm;
+}
+
+/* 3. Tła */
+.bbg {
+    background-image: url("/img/bg.jpeg");
+    color: white;
+    text-shadow: 0 0 5px black;
+}
+
+.bbg-repeating {
+    background-repeat: repeat;
+    background-size: 12.5% 300px;
+}
+
+.bbg-stretch {
+    background-size: 100% 100%;
+}
+
+.bbg-position {
+    background-color: #001f3f;
+    background-repeat: no-repeat;
+    background-size: 25% 25%;
+    background-position: 75% 30%;
+}
+
+.bbg-half {
+    background-color: #85144b;
+    background-repeat: repeat-x;
+    background-size: 10% 50vh;
+}
+
+.bbg-fixed {
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+/* 4. Różne selektory */
+button {
+    background: linear-gradient(to left, #FF4136, #FF851B, #FFDC00, #2ECC40, #0074D9, #B10DC9, #FF4136);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    transition-duration: 1s;
+}
+
+button:hover {
+    background-position: 100vw 0;
+}
+
+button:hover::after {
+    content: ':hover';
+}
+
+.myclass {
+    background: paleturquoise;
+    margin: 1rem 0;
+}
+
+.myclass img {
+    display: block;
+    transform: skewX(-45deg);
+    border-radius: 50%;
+    margin: 1rem auto;
+}
+
+#mylist {
+    background-color: palegoldenrod;
+}
+
+#mylist > li {
+    border: 1px solid red;
+}
+
+#mylist li {
+    font-style: italic;
+}
+
+button, .myclass {
+    font-weight: bold;
+}
+
+/* 5. Box model */
+.parent {
+    position: static;
+    background-color: #93c5fd;
+    width: 500px;
+    height: 400px;
+}
+
+.child {
+    background-color: peachpuff;
+    text-align: justify;
+    margin: 40px;
+    padding: 10px 20px 30px 40px;
+    border: 5px solid black;
+}
+
+.relative-parent {
+    display: flex;
+    margin-top: 2rem;
+}
+
+.relative-parent > div {
+    width: 100px;
+    height: 100px;
+    background-color: aquamarine;
+    border: 2px solid blue;
+}
+
+.relative {
+    position: relative;
+    left: 50px;
+    bottom: 1em;
+}
+
+.relative-absolute {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: purple;
+    left: 10px;
+    top: 30px;
+}
+
+.absolute, .fixed {
+    padding: 1rem;
+    font-family: monospace;
+    border: 1px solid black;
+    background: darkkhaki;
+}
+
+.absolute {
+    position: absolute;
+    right: 100px;
+    top: 200px;
+}
+
+.fixed {
+    position: fixed;
+    right: 300px;
+    top: 200px;
+}
+
+.float {
+    float: right;
+}
+
+/* 6. Formatowanie tekstu */
+.font-serif {
+    font-family: serif;
+}
+
+.font-monospace {
+    font-family: monospace;
+    color: navy;
+}
+
+.font-big {
+    font-size: 2em;
+    font-style: italic;
+}
+
+.font-bold {
+    font-weight: bold;
+    text-align: center;
+}
+
+.font-underline {
+    text-decoration-line: underline;
+    text-decoration-color: maroon;
+    text-decoration-style: wavy;
+}
+
+.font-strikethrough {
+    text-decoration: line-through solid red;
+    letter-spacing: 5px;
+}
+
+.font-small {
+    font-size: 75%;
+    font-variant: small-caps;
+    font-weight: 800;
+}
+
+/* 7. Ramki */
+.bordered {
+    padding: 10px;
+    margin: 5rem;
+
+    border-color: rgb(20, 40, 80);
+    border-width: 10px 20px 30px 40px;
+    border-style: dashed;
+}
+
+/* 9. Pseudoklasy i pseudoelementy */
+.pseudo-p {
+    text-align: justify;
+    padding: 2rem;
+}
+
+.pseudo-p::first-letter {
+    color: maroon;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.pseudo-p::first-line {
+    background-color: burlywood;
+}
+
+.pseudo-p::selection {
+    background-color: darkorchid;
+    color: lightskyblue;
+}
+
+.pseudo-parent {
+    display: flex;
+}
+
+.pseudo-child {
+    flex: 1;
+    height: 100px;
+    border: 1px solid black;
+}
+
+.pseudo-child:nth-child(3n + 2) {
+    background-color: orange;
+}
+
+.pseudo-child:first-child {
+    background-color: red;
+}
+
+.pseudo-child:last-child {
+    background-color: green;
+}
+
+/* 8. Tabele */
+.mytable {
+    margin: 5rem auto;
+    background: linear-gradient(-45deg, black, gray);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.mytable, .mytable td, .mytable th {
+    border: 2px solid navy;
+}
+
+.mytable :where(td, th) {
+    padding: 0.25rem 0.5rem;
+}
+
+.mytable th {
+    background-color: lightsteelblue;
+}
+
+.mytable th:first-child {
+    border-top-left-radius: 1rem;
+}
+
+.mytable th:last-child {
+    border-top-right-radius: 1rem;
+}
+
+.mytable td {
+    background-color: #eeeeee;
+}
+
+.mytable thead {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.mytable thead tr:hover th {
+    background: slateblue;
+}
+
+.mytable tbody td:last-child {
+    text-align: right;
+}
+
+.mytable tfoot {
+    font-size: 75%;
+    text-align: center;
+    color: gray;
+}
+
+.mytable tfoot td {
+    border-radius: 0 0 1rem 1rem;
+}
+
+/* 10. Menu */
+.menu, .menu * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1;
+    transition-duration: 0.25s;
+}
+
+.menu {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background-color: #064e3b;
+    color: #eeeeee;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.menu:hover {
+    background-color: #065f46;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.menu a {
+    color: #bfdbfe;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    color: #93c5fd;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu li:first-child {
+    border-radius: 0.5rem 0 0 0;
+}
+
+.menu li:last-child {
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.menu > ul {
+    display: none;
+    position: absolute;
+    top: 3rem;
+    right: 0;
+    width: 16rem;
+    background-color: #065f46;
+    border-radius: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.menu:hover > ul {
+    display: block;
+}
+
+.menu > ul > li {
+    position: relative;
+}
+
+.menu ul > li > :where(a, span) {
+    padding: 0.5rem 1rem;
+    display: block;
+}
+
+.menu > ul > li:hover {
+    background-color: #047857;
+}
+
+.menu > ul > li > ul {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 16rem;
+    width: 20rem;
+    background-color: #047857;
+    border-radius: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.menu > ul > li:hover > ul {
+    display: block;
+}
+
+.menu > ul > li > ul > li:hover {
+    background-color: #059669;
+}
