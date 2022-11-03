@@ -60,7 +60,13 @@ for (let trow = -1; trow < n; trow++) {
     } else {
       const product = numbers[trow] * numbers[tcol];
       cell.innerText = product.toString();
-      cell.classList.add(product % 2 === 0 ? "even" : "odd");
+      const remainder = product % 2;
+
+      if (remainder === 0) {
+        cell.classList.add("even")
+      } else {
+        cell.classList.add("odd")
+      }
     }
 
     tr.appendChild(cell);

@@ -80,7 +80,7 @@ canvas {
   width: 5vw;
   height: 50px;
   top: 1rem;
-  right: 1rem;
+  right: 25%;
 }
 
 .scaled-canvas {
