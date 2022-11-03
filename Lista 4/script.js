@@ -7,7 +7,7 @@ const NUMBER_MAX = 99;
 const ADDITIONAL_CANVAS_COUNT = 20;
 
 const errorMessage = document.getElementById("error-message");
-const tableWrapper = document.getElementById("table-wrapper");
+const table = document.getElementById("table")
 const canvasWrapper = document.getElementById("canvas-wrapper");
 
 function randomBetweenInclusive(minInc, maxInc) {
@@ -45,7 +45,6 @@ const numbers = Array.from({ length: n }).map(() =>
   randomBetweenInclusive(NUMBER_MIN, NUMBER_MAX)
 );
 
-const table = document.createElement("table");
 const tbody = document.createElement("tbody");
 
 for (let trow = -1; trow < n; trow++) {
@@ -76,7 +75,6 @@ for (let trow = -1; trow < n; trow++) {
 }
 
 table.appendChild(tbody);
-tableWrapper.appendChild(table);
 
 // Zadanie 2
 const fragment = document.createDocumentFragment();
@@ -96,10 +94,8 @@ document.querySelectorAll("canvas").forEach((canvas) => {
     const { offsetX: x, offsetY: y } = event;
 
     clearCanvas(ctx);
-    drawLine(ctx, 0, 0, x, y);
-    drawLine(ctx, width, 0, x, y);
-    drawLine(ctx, width, height, x, y);
-    drawLine(ctx, 0, height, x, y);
+    drawLine(ctx, 0, y, width, y);
+    drawLine(ctx, x, 0, x, height);
   });
 
   canvas.addEventListener("mouseleave", () => clearCanvas(ctx));
