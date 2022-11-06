@@ -2,11 +2,28 @@
 
 namespace Exercise2
 {
-    internal class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static int ReadNumberCount()
         {
-            Console.WriteLine("Hello World!");
+            int n;
+
+            Console.Write("Podaj liczbę n: ");
+            var nStr = Console.ReadLine();
+
+            while (!int.TryParse(nStr, out n) || n < 1)
+            {
+                Console.WriteLine("Podano błędną wartość! Wymagana liczba całkowita n >= 1.");
+                Console.Write("Podaj liczbę n: ");
+                nStr = Console.ReadLine();
+            }
+
+            return n;
+        }
+
+        private static void Main()
+        {
+            var n = ReadNumberCount();
         }
     }
 }

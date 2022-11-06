@@ -79,16 +79,19 @@ namespace Exercise1
             }
         }
 
-        private static double ReadNumber(string prompt)
+        private static double ReadDouble(string prompt)
         {
-            string? input;
             double parsed;
 
-            do
+            Console.Write(prompt);
+            var input = Console.ReadLine();
+
+            while (!double.TryParse(input, out parsed))
             {
+                Console.WriteLine("Podano błędną wartość!");
                 Console.Write(prompt);
                 input = Console.ReadLine();
-            } while (!double.TryParse(input, out parsed));
+            }
 
             return parsed;
         }
@@ -96,9 +99,9 @@ namespace Exercise1
         private static void Main()
         {
             Console.WriteLine("Kalkulator rozwiązań równania kwadratowego ax^2 + bx + c = 0.");
-            var a = ReadNumber("Podaj współczynnik kwadratowy a: ");
-            var b = ReadNumber("Podaj współczynnik liniowy b: ");
-            var c = ReadNumber("Podaj współczynnik stały c: ");
+            var a = ReadDouble("Podaj współczynnik kwadratowy a: ");
+            var b = ReadDouble("Podaj współczynnik liniowy b: ");
+            var c = ReadDouble("Podaj współczynnik stały c: ");
 
             var solutionCount = SolveQuadratic(a, b, c, out var x1, out var x2);
 
