@@ -21,49 +21,55 @@ namespace Exercise2
             return n;
         }
 
+        private static int ReadNextNumber(ref string buffer)
+        {
+            while (true)
+            {
+                while (string.IsNullOrWhiteSpace(buffer))
+                    buffer = Console.ReadLine() ?? "";
+
+                buffer = buffer.Trim();
+
+                var readUntilIndex = buffer.IndexOfAny(new[] { ' ', '\t', '\n' });
+                if (readUntilIndex == -1)
+                    readUntilIndex = buffer.Length;
+
+                var token = buffer[..readUntilIndex];
+                buffer = buffer[readUntilIndex..];
+
+                if (int.TryParse(token, out var output))
+                    return output;
+            }
+        }
+
         private static void Main()
         {
-            int? currentLargest = null;
-            int? currentSecondLargest = null;
+            int? largest = null;
+            int? secondLargest = null;
 
             var n = ReadNumberCount();
             Console.WriteLine($"Podaj {n} liczb:");
 
-            while (n > 0)
+            var buffer = "";
+            for (var i = 0; i < n; i++)
             {
-                var line = Console.ReadLine() ?? "";
-                foreach (var word in line.Split())
+                var number = ReadNextNumber(ref buffer);
+
+                if (number == largest || number == secondLargest)
+                    continue;
+
+                if (number > largest || largest == null)
                 {
-                    if (!int.TryParse(word, out var number))
-                        continue;
-
-                    if (number > currentLargest || currentLargest == null)
-                    {
-                        currentSecondLargest = currentLargest;
-                        currentLargest = number;
-                    }
-                    else if (
-                        number != currentLargest
-                        && (number > currentSecondLargest || currentSecondLargest == null)
-                    )
-                    {
-                        currentSecondLargest = number;
-                    }
-
-                    n--;
-                    if (n == 0)
-                        break;
+                    secondLargest = largest;
+                    largest = number;
+                }
+                else if (number > secondLargest || secondLargest == null)
+                {
+                    secondLargest = number;
                 }
             }
 
-            if (currentSecondLargest == null)
-            {
-                Console.WriteLine("brak rozwiązania");
-            }
-            else
-            {
-                Console.WriteLine(currentSecondLargest);
-            }
+            Console.WriteLine(secondLargest == null ? "brak rozwiązania" : secondLargest);
         }
     }
 }
