@@ -79,6 +79,11 @@ namespace Exercise1
             }
         }
 
+        /// <summary>
+        /// Wczytuje pojedynczą liczbę zmiennoprzecinkową podaną przez użytkownika.
+        /// </summary>
+        /// <param name="prompt">tekst wyświetlony użytkownikowi zachęcający do podania liczby</param>
+        /// <returns>liczbę zmiennoprzecinkową podaną przez użytkownika</returns>
         private static double ReadDouble(string prompt)
         {
             double parsed;

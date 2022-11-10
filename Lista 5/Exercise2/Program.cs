@@ -4,6 +4,10 @@ namespace Exercise2
 {
     internal static class Program
     {
+        /// <summary>
+        /// Wczytuje z klawiatury liczbę liczb do wczytania.
+        /// </summary>
+        /// <returns>liczba liczb podana przez użytkownika (n >= 1)</returns>
         private static int ReadNumberCount()
         {
             int n;
@@ -21,6 +25,11 @@ namespace Exercise2
             return n;
         }
 
+        /// <summary>
+        /// Wczytuje kolejną liczbę podaną przez użytkownika ze standardowego wejścia.
+        /// </summary>
+        /// <param name="buffer">przechowuje tekst już wczytany od użytkownika, ale jeszcze nie zwrócony, parametr ref, aby utrzymać stan między wywołaniami</param>
+        /// <returns>pierwszą liczbę z "kolejki" oczekujących liczb podanych przez użytkownika</returns>
         private static int ReadNextNumber(ref string buffer)
         {
             while (true)
