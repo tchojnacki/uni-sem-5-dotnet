@@ -32,6 +32,8 @@ namespace Exercise6
                 "Longest string passed yet" // long string
             );
 
+            Debug.Assert(typeCount == (4, 2, 5, 8));
+
             Console.WriteLine($"Even integers: {typeCount.EvenIntegerCount}");
             Console.WriteLine($"Real positive numbers: {typeCount.PositiveRealNumberCount}");
             Console.WriteLine($"Strings of length at least 5: {typeCount.LongStringCount}");
