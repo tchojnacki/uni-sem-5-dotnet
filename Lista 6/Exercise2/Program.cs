@@ -1,4 +1,8 @@
-﻿using System;
+﻿// ReSharper disable ConvertToConstant.Local
+
+// https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/verbatim
+
+using System;
 
 namespace Exercise2
 {
@@ -6,7 +10,8 @@ namespace Exercise2
     {
         private static void Main()
         {
-            Console.WriteLine("Hello World!");
+            var @class = 42;
+            Console.WriteLine(@class);
         }
     }
 }
