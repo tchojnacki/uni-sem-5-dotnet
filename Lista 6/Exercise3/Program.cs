@@ -30,17 +30,17 @@ namespace Exercise3
             Console.Write("Sorted array: ");
             PrintArray(array);
 
-            Console.WriteLine("4) Array.Resize");
+            Console.WriteLine("2) Array.Resize");
             Array.Resize(ref array, 7);
             Console.Write("Resized array: ");
             PrintArray(array);
 
-            Console.WriteLine("5) Array.Reverse");
+            Console.WriteLine("4) Array.Reverse");
             Array.Reverse(array);
             Console.Write("Reversed array: ");
             PrintArray(array);
 
-            Console.WriteLine("6) Array.BinarySearch");
+            Console.WriteLine("5) Array.BinarySearch");
             const int searched = 31;
             var index = Array.BinarySearch(array, searched);
             Console.WriteLine($"Index of {searched} is {index}");
