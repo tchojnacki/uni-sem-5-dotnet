@@ -13,15 +13,15 @@ namespace Exercises
             Console.WriteLine(indent + "[");
             foreach (var element in collection)
             {
-                if (element is IEnumerable nested)
+                if (element is IEnumerable nested and not string)
                     PrintNestedCollection(nested, nextIndent);
                 else
-                    Console.WriteLine(nextIndent + element);
+                    Console.WriteLine(nextIndent + element + ",");
             }
             Console.WriteLine(indent + "],");
         }
 
-        public static bool NestedEqualityCheck(IEnumerable<object> c1, IEnumerable<object> c2)
+        public static bool NestedEqualityCheck<T>(IEnumerable<T> c1, IEnumerable<T> c2)
         {
             var l1 = c1.ToList();
             var l2 = c2.ToList();
@@ -42,6 +42,37 @@ namespace Exercises
             }
 
             return true;
+        }
+
+        public static void PrintGroupedCollections<TK, TV>(
+            IEnumerable<(TK Key, IEnumerable<TV> Items)> groups
+        )
+        {
+            foreach (var group in groups)
+            {
+                Console.WriteLine("Group: " + group.Key);
+                Console.WriteLine("Elements:");
+                PrintNestedCollection(group.Items);
+            }
+        }
+
+        public static bool GroupedEqualityCheck<TK, TV>(
+            IEnumerable<(TK Key, IEnumerable<TV> Items)> g1,
+            IEnumerable<(TK Key, IEnumerable<TV> Items)> g2
+        )
+        {
+            var l1 = g1.ToList();
+            var l2 = g2.ToList();
+
+            if (l1.Count != l2.Count)
+                return false;
+
+            return !l1.Zip(l2)
+                .Any(
+                    pair =>
+                        !pair.First.Key.Equals(pair.Second.Key)
+                        || !NestedEqualityCheck(pair.First.Items, pair.Second.Items)
+                );
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Exercises
 {
     internal static class Ex1
     {
-        public static IEnumerable<StudentWithTopics[]> ChunkStudentsByNameFluent(
+        public static IEnumerable<StudentWithTopics[]> ChunkStudentsByNameMbs(
             IEnumerable<StudentWithTopics> students,
             int n
         )
@@ -19,7 +19,7 @@ namespace Exercises
                 .Select(g => g.Select(y => y.s).ToArray());
         }
 
-        public static IEnumerable<StudentWithTopics[]> ChunkStudentsByNameQuery(
+        public static IEnumerable<StudentWithTopics[]> ChunkStudentsByNameQes(
             IEnumerable<StudentWithTopics> students,
             int n
         )
