@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using LectureExamples;
 
 namespace Exercises
@@ -75,11 +77,58 @@ namespace Exercises
             Debug.Assert(Util.StructuralEquality(resultMbsB, resultQesB));
         }
 
+        private static void CheckEx4()
+        {
+            Console.WriteLine("Exercise 4)");
+
+            var studentType = typeof(Student);
+            var topicType = Type.GetType("Exercises.Topic")!;
+
+            // a)
+            var student = Activator.CreateInstance(
+                studentType,
+                123,
+                54321,
+                "Smith",
+                Gender.Male,
+                true,
+                1,
+                new List<int> { 3, 4, 5 }
+            )!;
+
+            var topic1 = Assembly
+                .GetExecutingAssembly()
+                .CreateInstance(
+                    "Exercises.Topic",
+                    false,
+                    BindingFlags.Default,
+                    null,
+                    new object[] { 3, "C#" },
+                    null,
+                    null
+                );
+
+            var topic2 = Activator.CreateInstance(topicType, 7, "neural networks");
+
+            // b)
+            var methodInfo = student
+                .GetType()
+                .GetMethod("IsInterestedInTopic", new[] { topicType })!;
+
+            var result1 = methodInfo.Invoke(student, new[] { topic1 });
+            var result2 = methodInfo.Invoke(student, new[] { topic2 });
+
+            Console.WriteLine($"Is |{student}| interested in:");
+            Console.WriteLine($"|{topic1}|? {result1}");
+            Console.WriteLine($"|{topic2}|? {result2}");
+        }
+
         private static void Main()
         {
             CheckEx1();
             CheckEx2();
             CheckEx3();
+            CheckEx4();
         }
     }
 }

@@ -39,6 +39,12 @@ namespace Exercises
             return $"{Id, 2}) {Index, 5}, {Name, 11}, {Gender, 6},{(Active ? "active" : "no active"), 9},{DepartmentId, 2}, topicIds: {string.Join(", ", TopicIds)}";
         }
 
+        #region Exercise4
+
+        public bool IsInterestedInTopic(Topic t) => TopicIds.Contains(t.Id);
+
+        #endregion
+
         #region Equality
 
         private object EqualityMembers => (Id, Index, Name, Gender, Active, DepartmentId);
