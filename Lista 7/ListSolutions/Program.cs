@@ -18,9 +18,9 @@ namespace Exercises
             var resultQes = Ex1.ChunkStudentsByNameQes(students, n).ToList();
             var resultExt = Ex1.ChunkStudentsByNameExt(students, n).ToList();
 
-            Util.PrintNestedCollection(resultMbs);
-            Debug.Assert(Util.NestedEqualityCheck(resultMbs, resultQes));
-            Debug.Assert(Util.NestedEqualityCheck(resultMbs, resultExt));
+            Util.PrintEnumerable(resultMbs);
+            Debug.Assert(Util.StructuralEquality(resultMbs, resultQes));
+            Debug.Assert(Util.StructuralEquality(resultMbs, resultExt));
         }
 
         private static void CheckEx2()
@@ -34,22 +34,52 @@ namespace Exercises
             var resultMbsA = Ex2.TopicsByPopularityMbs(students).ToList();
             var resultQesA = Ex2.TopicsByPopularityQes(students).ToList();
 
-            Util.PrintNestedCollection(resultMbsA);
-            Debug.Assert(Util.NestedEqualityCheck(resultMbsA, resultQesA));
+            Util.PrintEnumerable(resultMbsA);
+            Debug.Assert(Util.StructuralEquality(resultMbsA, resultQesA));
 
             Console.WriteLine("b)");
 
             var resultMbsB = Ex2.TopicsByPopularityByGenderMbs(students).ToList();
             var resultQesB = Ex2.TopicsByPopularityByGenderQes(students).ToList();
 
-            Util.PrintGroupedCollections(resultMbsB);
-            Debug.Assert(Util.GroupedEqualityCheck(resultMbsB, resultQesB));
+            Util.PrintGroupedEnumerable(resultMbsB);
+            Debug.Assert(Util.GroupedStructuralEquality(resultMbsB, resultQesB));
+        }
+
+        private static void CheckEx3()
+        {
+            Console.WriteLine("Exercise 3)");
+
+            var students = Generator.GenerateStudentsWithTopicsEasy();
+
+            Console.WriteLine("a)");
+
+            var resultMbsA = Ex3.ConvertStudentsMbs(students, Ex3.HardcodedTopics);
+            var resultsQesA = Ex3.ConvertStudentsQes(students, Ex3.HardcodedTopics);
+
+            Console.WriteLine("Before:");
+            Util.PrintEnumerable(students);
+            Console.WriteLine("After:");
+            Util.PrintEnumerable(resultMbsA);
+            Debug.Assert(Util.StructuralEquality(resultMbsA, resultsQesA));
+
+            Console.WriteLine("b)");
+
+            var resultMbsB = Ex3.ConvertStudentsMbs(students, Ex3.ExtractTopicsMbs(students));
+            var resultQesB = Ex3.ConvertStudentsQes(students, Ex3.ExtractTopicsQes(students));
+
+            Console.WriteLine("Before:");
+            Util.PrintEnumerable(students);
+            Console.WriteLine("After:");
+            Util.PrintEnumerable(resultMbsB);
+            Debug.Assert(Util.StructuralEquality(resultMbsB, resultQesB));
         }
 
         private static void Main()
         {
             CheckEx1();
             CheckEx2();
+            CheckEx3();
         }
     }
 }

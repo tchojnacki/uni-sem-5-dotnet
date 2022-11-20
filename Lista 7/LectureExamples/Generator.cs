@@ -1,39 +1,11 @@
 ﻿// ReSharper disable StringLiteralTypo
 
-using System;
 using System.Collections.Generic;
 
 namespace LectureExamples
 {
     public static class Generator
     {
-        public static int[] GenerateIntsEasy()
-        {
-            return new[] { 5, 3, 9, 7, 1, 2, 6, 7, 8 };
-        }
-
-        public static int[] GenerateIntsMany()
-        {
-            var result = new int[10000];
-            var random = new Random();
-            for (var i = 0; i < result.Length; i++)
-                result[i] = random.Next(1000);
-            return result;
-        }
-
-        public static List<string> GenerateNamesEasy()
-        {
-            return new List<string>
-            {
-                "Nowak",
-                "Kowalski",
-                "Schmidt",
-                "Newman",
-                "Bandingo",
-                "Miniwiliger"
-            };
-        }
-
         public static List<StudentWithTopics> GenerateStudentsWithTopicsEasy()
         {
             return new List<StudentWithTopics>
@@ -130,17 +102,6 @@ namespace LectureExamples
                     2,
                     new List<string> { "algorithms", "web programming" }
                 )
-            };
-        }
-
-        public static List<Department> GenerateDepartmentsEasy()
-        {
-            return new List<Department>
-            {
-                new(1, "Computer Science"),
-                new(2, "Electronics"),
-                new(3, "Mathematics"),
-                new(4, "Mechanics")
             };
         }
     }

@@ -1,11 +1,11 @@
-﻿namespace LectureExamples
+﻿namespace Exercises
 {
-    public class Department
+    public class Topic
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public Department(int id, string name)
+        public Topic(int id, string name)
         {
             Id = id;
             Name = name;
@@ -13,7 +13,7 @@
 
         public override string ToString()
         {
-            return $"{Id, 2}), {Name, 11}";
+            return $"{Id, 2}) {Name, 20}";
         }
     }
 }

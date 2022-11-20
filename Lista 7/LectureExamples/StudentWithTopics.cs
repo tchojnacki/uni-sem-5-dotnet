@@ -35,9 +35,7 @@ namespace LectureExamples
 
         public override string ToString()
         {
-            var result =
-                $"{Id, 2}) {Index, 5}, {Name, 11}, {Gender, 6},{(Active ? "active" : "no active"), 9},{DepartmentId, 2}, topics: ";
-            return Topics.Aggregate(result, (current, str) => current + str + ", ");
+            return $"{Id, 2}) {Index, 5}, {Name, 11}, {Gender, 6},{(Active ? "active" : "no active"), 9},{DepartmentId, 2}, topics: {string.Join(", ", Topics)}";
         }
     }
 }

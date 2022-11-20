@@ -7,21 +7,21 @@ namespace Exercises
 {
     internal static class Util
     {
-        public static void PrintNestedCollection(IEnumerable collection, string indent = "")
+        public static void PrintEnumerable(IEnumerable collection, string indent = "")
         {
             var nextIndent = indent + "\t";
             Console.WriteLine(indent + "[");
             foreach (var element in collection)
             {
                 if (element is IEnumerable nested and not string)
-                    PrintNestedCollection(nested, nextIndent);
+                    PrintEnumerable(nested, nextIndent);
                 else
                     Console.WriteLine(nextIndent + element + ",");
             }
             Console.WriteLine(indent + "],");
         }
 
-        public static bool NestedEqualityCheck<T>(IEnumerable<T> c1, IEnumerable<T> c2)
+        public static bool StructuralEquality<T>(IEnumerable<T> c1, IEnumerable<T> c2)
         {
             var l1 = c1.ToList();
             var l2 = c2.ToList();
@@ -33,7 +33,7 @@ namespace Exercises
             {
                 var elementsEqual = pair switch
                 {
-                    (IEnumerable<object> n1, IEnumerable<object> n2) => NestedEqualityCheck(n1, n2),
+                    (IEnumerable<object> n1, IEnumerable<object> n2) => StructuralEquality(n1, n2),
                     var (e1, e2) => e1.Equals(e2)
                 };
 
@@ -44,7 +44,7 @@ namespace Exercises
             return true;
         }
 
-        public static void PrintGroupedCollections<TK, TV>(
+        public static void PrintGroupedEnumerable<TK, TV>(
             IEnumerable<(TK Key, IEnumerable<TV> Items)> groups
         )
         {
@@ -52,11 +52,11 @@ namespace Exercises
             {
                 Console.WriteLine("Group: " + group.Key);
                 Console.WriteLine("Elements:");
-                PrintNestedCollection(group.Items);
+                PrintEnumerable(group.Items);
             }
         }
 
-        public static bool GroupedEqualityCheck<TK, TV>(
+        public static bool GroupedStructuralEquality<TK, TV>(
             IEnumerable<(TK Key, IEnumerable<TV> Items)> g1,
             IEnumerable<(TK Key, IEnumerable<TV> Items)> g2
         )
@@ -71,7 +71,7 @@ namespace Exercises
                 .Any(
                     pair =>
                         !pair.First.Key.Equals(pair.Second.Key)
-                        || !NestedEqualityCheck(pair.First.Items, pair.Second.Items)
+                        || !StructuralEquality(pair.First.Items, pair.Second.Items)
                 );
         }
     }
