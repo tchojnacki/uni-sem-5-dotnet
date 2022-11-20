@@ -60,7 +60,7 @@ namespace Exercises
             ).ToList();
         }
 
-        public static IReadOnlyList<Topic> ExtractTopicsMbs(IEnumerable<StudentWithTopics> students)
+        public static List<Topic> ExtractTopicsMbs(IEnumerable<StudentWithTopics> students)
         {
             return students
                 .SelectMany(s => s.Topics)
@@ -69,13 +69,43 @@ namespace Exercises
                 .ToList();
         }
 
-        public static IReadOnlyList<Topic> ExtractTopicsQes(IEnumerable<StudentWithTopics> students)
+        public static List<Topic> ExtractTopicsQes(IEnumerable<StudentWithTopics> students)
         {
             var id = 1;
             return (
                 from t in (from s in students from t in s.Topics select t).Distinct()
                 select new Topic(id++, t)
             ).ToList();
+        }
+
+        public static void ConvertDatabase(
+            IEnumerable<StudentWithTopics> oldStudents,
+            out List<Ex3c.Student> newStudentList,
+            out List<Topic> newTopicList,
+            out List<Ex3c.StudentToTopic> newStudentToTopicList
+        )
+        {
+            var oldStudentList = oldStudents.ToList();
+            var topicList = ExtractTopicsMbs(oldStudentList);
+
+            newTopicList = topicList;
+            newStudentList = oldStudentList
+                .Select(
+                    s => new Ex3c.Student(s.Id, s.Index, s.Name, s.Gender, s.Active, s.DepartmentId)
+                )
+                .ToList();
+            newStudentToTopicList = oldStudentList
+                .SelectMany(
+                    s =>
+                        s.Topics.Select(
+                            tn =>
+                                new Ex3c.StudentToTopic(
+                                    s.Id,
+                                    topicList.Single(t => t.Name == tn).Id
+                                )
+                        )
+                )
+                .ToList();
         }
     }
 }

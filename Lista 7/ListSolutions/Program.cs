@@ -75,6 +75,22 @@ namespace Exercises
             Console.WriteLine("After:");
             Util.PrintEnumerable(resultMbsB);
             Debug.Assert(Util.StructuralEquality(resultMbsB, resultQesB));
+
+            Console.WriteLine("c)");
+
+            Ex3.ConvertDatabase(
+                students,
+                out var newStudentList,
+                out var newTopicList,
+                out var newStudentTopicList
+            );
+
+            Console.WriteLine("Student:");
+            Util.PrintEnumerable(newStudentList);
+            Console.WriteLine("Topic:");
+            Util.PrintEnumerable(newTopicList);
+            Console.WriteLine("StudentToTopic:");
+            Util.PrintEnumerable(newStudentTopicList);
         }
 
         private static void CheckEx4()
