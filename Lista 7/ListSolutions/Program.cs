@@ -109,7 +109,7 @@ namespace Exercises
                 Gender.Male,
                 true,
                 1,
-                new List<int> { 3, 4, 5 }
+                new List<int> { 1, 4, 5 }
             )!;
 
             var topic1 = Assembly
@@ -119,12 +119,12 @@ namespace Exercises
                     false,
                     BindingFlags.Default,
                     null,
-                    new object[] { 3, "C#" },
+                    new object[] { 1, "C#" },
                     null,
                     null
                 );
 
-            var topic2 = Activator.CreateInstance(topicType, 7, "neural networks");
+            var topic2 = Activator.CreateInstance(topicType, 9, "neural networks");
 
             // b)
             var methodInfo = student
