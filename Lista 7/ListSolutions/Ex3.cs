@@ -35,7 +35,9 @@ namespace Exercises
                             s.Gender,
                             s.Active,
                             s.DepartmentId,
-                            s.Topics.Select(tn => topicSet.Single(t => t.Name == tn).Id).ToList()
+                            s.Topics
+                                .Join(topicSet, tn => tn, t => t.Name, (_, topic) => topic.Id)
+                                .ToList()
                         )
                 )
                 .ToList();
@@ -55,7 +57,11 @@ namespace Exercises
                     s.Gender,
                     s.Active,
                     s.DepartmentId,
-                    (from tn in s.Topics select topicSet.Single(t => t.Name == tn).Id).ToList()
+                    (
+                        from tn in s.Topics
+                        join t in topicSet on tn equals t.Name
+                        select t.Id
+                    ).ToList()
                 )
             ).ToList();
         }
@@ -97,12 +103,11 @@ namespace Exercises
             newStudentToTopicList = oldStudentList
                 .SelectMany(
                     s =>
-                        s.Topics.Select(
-                            tn =>
-                                new Ex3c.StudentToTopic(
-                                    s.Id,
-                                    topicList.Single(t => t.Name == tn).Id
-                                )
+                        s.Topics.Join(
+                            topicList,
+                            tn => tn,
+                            t => t.Name,
+                            (_, t) => new Ex3c.StudentToTopic(s.Id, t.Id)
                         )
                 )
                 .ToList();
