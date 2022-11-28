@@ -1,0 +1,18 @@
+﻿@model IndexViewModel
+@{
+    ViewBag.Title = "Strona główna";
+}
+
+<h1>Strona główna</h1>
+<p>Przydatne linki:</p>
+<ul>
+    <li>
+        Tool/Solve
+        <ul>
+            @foreach (var (a, b, c) in Model.QuadraticExamples)
+            {
+                <li><a asp-controller="Tool" asp-action="Solve" asp-route-a="@a" asp-route-b="@b" asp-route-c="@c">a = @a.ToString("g5"); b = @b.ToString("g5"); c = @c.ToString("g5")</a></li>
+            }
+        </ul>
+    </li>
+</ul>
