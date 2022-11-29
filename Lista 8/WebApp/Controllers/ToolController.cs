@@ -23,10 +23,10 @@ namespace WebApp.Controllers
 
             ViewBag.ResultClass = solutionCount switch
             {
-                0 => "alert-danger font-italic",
-                1 => "alert-info font-weight-bold",
-                2 => "alert-success font-weight-bold",
-                -1 => "alert-warning font-italic",
+                0 => "text-danger font-italic",
+                1 => "text-info font-weight-bold",
+                2 => "text-success font-weight-bold",
+                -1 => "text-warning font-italic",
                 _ => throw new InvalidOperationException()
             };
 
