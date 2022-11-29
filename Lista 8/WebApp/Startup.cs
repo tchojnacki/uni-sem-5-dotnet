@@ -19,7 +19,7 @@ namespace WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IQuadraticSolver, QuadraticSolverAdapter>();
-            services.AddSingleton<IRandomQuadraticParams, RandomQuadraticParams>();
+            services.AddSingleton<IExampleGenerator, ExampleGenerator>();
             services.AddControllersWithViews();
         }
 

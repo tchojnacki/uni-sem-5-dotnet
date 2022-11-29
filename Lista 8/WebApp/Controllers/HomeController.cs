@@ -7,17 +7,29 @@ namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IRandomQuadraticParams _randomQuadraticParams;
+        private readonly IExampleGenerator _exampleGenerator;
 
-        public HomeController(IRandomQuadraticParams randomQuadraticParams) =>
-            _randomQuadraticParams = randomQuadraticParams;
+        public HomeController(IExampleGenerator exampleGenerator) =>
+            _exampleGenerator = exampleGenerator;
 
         public IActionResult Index()
         {
             return View(
                 new IndexViewModel
                 {
-                    QuadraticExamples = _randomQuadraticParams.GenerateParams().Take(10).ToList()
+                    QuadraticExamples = _exampleGenerator.GenQuadraticExamples().Take(20).ToList(),
+                    SetExamples = _exampleGenerator
+                        .GenRangeExamples()
+                        .Distinct()
+                        .Take(5)
+                        .OrderBy(n => n)
+                        .ToList(),
+                    GuessExamples = _exampleGenerator
+                        .GenRangeExamples()
+                        .Distinct()
+                        .Take(10)
+                        .OrderBy(n => n)
+                        .ToList()
                 }
             );
         }

@@ -1,16 +1,21 @@
-﻿using List5;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using WebApp.Services;
 
 namespace WebApp.Controllers
 {
     public class ToolController : Controller
     {
+        private readonly IQuadraticSolver _quadraticSolver;
+
+        public ToolController(IQuadraticSolver quadraticSolver) =>
+            _quadraticSolver = quadraticSolver;
+
         public IActionResult Solve(double a, double b, double c)
         {
             ViewBag.ParamDescription = $"Użyte parametry: a = {a:g5}, b = {b:g5}, c = {c:g5}";
 
-            var solutionCount = Exercise1.SolveQuadratic(a, b, c, out var x1, out var x2);
+            var solutionCount = _quadraticSolver.SolveQuadratic(a, b, c, out var x1, out var x2);
 
             ViewBag.ResultText = solutionCount switch
             {

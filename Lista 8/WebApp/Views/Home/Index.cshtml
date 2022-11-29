@@ -5,14 +5,40 @@
 
 <h1>Strona główna</h1>
 <p>Przydatne linki:</p>
-<ul>
-    <li>
+<ul class="d-flex">
+    <li class="flex-fill">
         Tool/Solve
         <ul>
             @foreach (var (a, b, c) in Model.QuadraticExamples)
             {
                 <li><a asp-controller="Tool" asp-action="Solve" asp-route-a="@a" asp-route-b="@b" asp-route-c="@c">a = @a.ToString("g5"), b = @b.ToString("g5"), c = @c.ToString("g5")</a></li>
             }
+        </ul>
+    </li>
+    <li class="flex-fill">
+        Game
+        <ul>
+            <li>
+                Set
+                <ul>
+                    @foreach(var n in Model.SetExamples)
+                    {
+                        <li><a asp-controller="Game" asp-action="Set" asp-route-n="@n">@n</a></li>
+                    }
+                </ul>
+            </li>
+            <li>
+                <a asp-controller="Game" asp-action="Draw">Draw</a>
+            </li>
+            <li>
+                Guess
+                <ul>
+                    @foreach(var guess in Model.GuessExamples)
+                    {
+                        <li><a asp-controller="Game" asp-action="Guess" asp-route-guess="@guess">@guess</a></li>
+                    }
+                </ul>
+            </li>
         </ul>
     </li>
 </ul>
