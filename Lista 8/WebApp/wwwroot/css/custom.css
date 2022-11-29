@@ -3,3 +3,8 @@
     min-width: 33%;
     margin-inline: auto;
 }
+
+code {
+    color: inherit;
+    font-size: inherit;
+}
