@@ -1,0 +1,5 @@
+﻿.centered {
+    width: max-content;
+    min-width: 33%;
+    margin-inline: auto;
+}

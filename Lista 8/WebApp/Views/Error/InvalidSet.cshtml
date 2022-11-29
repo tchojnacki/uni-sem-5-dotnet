@@ -1,0 +1,8 @@
+﻿@using WebApp.Controllers
+@{
+    Layout = "_ErrorLayout";
+}
+
+<p>Podano nieprawidłowy argument do ustawienia zakresu!</p>
+<hr/>
+<p>Przykład użycia: <a asp-controller="Game" asp-action="Set" asp-route-n="@GameController.DefaultN">/Set,@GameController.DefaultN</a>.</p>

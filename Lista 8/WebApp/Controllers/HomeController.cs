@@ -21,11 +21,5 @@ namespace WebApp.Controllers
                 }
             );
         }
-
-        public IActionResult PageNotFound()
-        {
-            Response.StatusCode = 404;
-            return View();
-        }
     }
 }

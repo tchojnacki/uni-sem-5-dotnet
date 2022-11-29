@@ -32,11 +32,5 @@ namespace WebApp.Controllers
 
             return View();
         }
-
-        public IActionResult InvalidArguments()
-        {
-            Response.StatusCode = 400;
-            return View();
-        }
     }
 }

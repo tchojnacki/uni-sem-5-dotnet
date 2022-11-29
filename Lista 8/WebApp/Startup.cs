@@ -42,12 +42,6 @@ namespace WebApp
                     defaults: new { controller = "Tool", action = "Solve" }
                 );
 
-                endpoints.MapControllerRoute(
-                    name: "tool-solve-invalid",
-                    pattern: "Tool/Solve/{**rest}",
-                    defaults: new { controller = "Tool", action = "InvalidArguments" }
-                );
-
                 // Exercise 2
                 endpoints.MapControllerRoute(
                     name: "game-set-valid",
@@ -63,30 +57,37 @@ namespace WebApp
 
                 endpoints.MapControllerRoute(
                     name: "game-guess-valid",
-                    pattern: "Guess,{n:int}",
+                    pattern: "Guess,{guess:int}",
                     defaults: new { controller = "Game", action = "Guess" }
                 );
 
-                endpoints.MapControllerRoute(
-                    name: "game-set-invalid",
-                    pattern: "Set,{_}",
-                    defaults: new { controller = "Game", action = "InvalidSet" }
-                );
-
-                endpoints.MapControllerRoute(
-                    name: "game-guess-invalid",
-                    pattern: "Guess,{_}",
-                    defaults: new { controller = "Game", action = "InvalidGuess" }
-                );
-
-                // Util
+                // Other
                 endpoints.MapControllerRoute(
                     name: "home-index",
                     pattern: "/",
                     defaults: new { controller = "Home", action = "Index" }
                 );
 
-                endpoints.MapFallbackToController("PageNotFound", "Home");
+                // Errors
+                endpoints.MapControllerRoute(
+                    name: "tool-solve-invalid",
+                    pattern: "Tool/Solve/{**_}",
+                    defaults: new { controller = "Error", action = "InvalidSolve" }
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "game-set-invalid",
+                    pattern: "Set,{_}",
+                    defaults: new { controller = "Error", action = "InvalidSet" }
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "game-guess-invalid",
+                    pattern: "Guess,{_}",
+                    defaults: new { controller = "Error", action = "InvalidGuess" }
+                );
+
+                endpoints.MapFallbackToController("PageNotFound", "Error");
             });
         }
     }

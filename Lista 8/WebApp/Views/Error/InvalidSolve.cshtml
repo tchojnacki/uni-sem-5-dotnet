@@ -1,7 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Błąd";
+    Layout = "_ErrorLayout";
 }
 
-<h1 class="text-danger">Błąd</h1>
 <p>Podano błędne argumenty równania kwadratowego!</p>
+<hr/>
 <p>Przykład użycia: <a asp-controller="Tool" asp-action="Solve" asp-route-a="1" asp-route-b="2" asp-route-c="-3">/Tool/Solve/1/2/-3</a>.</p>
