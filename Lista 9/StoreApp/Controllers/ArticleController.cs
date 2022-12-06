@@ -13,61 +13,78 @@ namespace StoreApp.Controllers
 
         public ActionResult Index() => View(_articleContext.GetAllArticles());
 
-        public ActionResult Details(int id) => View(_articleContext.GetArticle(id));
+        public ActionResult Details(int? id)
+        {
+            if (id is null)
+                return new BadRequestResult();
+
+            var article = _articleContext.GetArticle((int)id);
+
+            if (article is null)
+                return new NotFoundResult();
+
+            return View(article);
+        }
 
         public ActionResult Create() => View();
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(Article article)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                    _articleContext.AddArticle(article);
+            if (!ModelState.IsValid)
+                return View(article);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _articleContext.AddArticle(article);
+            return RedirectToAction(nameof(Index));
         }
 
-        public ActionResult Edit(int id) => View(_articleContext.GetArticle(id));
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Article article)
+        public ActionResult Edit(int? id)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                    _articleContext.UpdateArticle(article);
+            if (id is null)
+                return new BadRequestResult();
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var article = _articleContext.GetArticle((int)id);
+
+            if (article is null)
+                return new NotFoundResult();
+
+            return View(article);
         }
 
-        public ActionResult Delete(int id) => View(_articleContext.GetArticle(id));
+        [HttpPost]
+        public ActionResult Edit(int? id, Article article)
+        {
+            if (id is null)
+                return new BadRequestResult();
+
+            if (!ModelState.IsValid)
+                return View(article);
+
+            _articleContext.UpdateArticle(article);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id is null)
+                return new BadRequestResult();
+
+            var article = _articleContext.GetArticle((int)id);
+
+            if (article is null)
+                return new NotFoundResult();
+
+            return View(article);
+        }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Article _)
+        public ActionResult Delete(int? id, Article article)
         {
-            try
-            {
-                _articleContext.DeleteArticle(id);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            if (id is null)
+                return new BadRequestResult();
+
+            _articleContext.DeleteArticle((int)id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

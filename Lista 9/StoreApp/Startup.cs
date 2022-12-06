@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StoreApp.DataContext;
+using System.Globalization;
 
 namespace StoreApp
 {
@@ -15,12 +17,18 @@ namespace StoreApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
             services.AddSingleton<IArticleContext, InMemoryListArticleContext>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
             else
@@ -30,6 +38,7 @@ namespace StoreApp
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseStatusCodePages();
 
             app.UseEndpoints(endpoints =>
             {
