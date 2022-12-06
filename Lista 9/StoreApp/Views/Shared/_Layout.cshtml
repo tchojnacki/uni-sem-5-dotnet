@@ -17,14 +17,14 @@
     <div class="navbar-menu">
         <div class="navbar-start">
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
+                <a class="navbar-link" asp-controller="Article" asp-action="Index">
                     Articles
                 </a>
                 <div class="navbar-dropdown">
-                    <a class="navbar-item">
+                        <a class="navbar-item" asp-controller="Article" asp-action="Index">
                         Index
                     </a>
-                    <a class="navbar-item">
+                        <a class="navbar-item" asp-controller="Article" asp-action="Create">
                         Create
                     </a>
                 </div>
