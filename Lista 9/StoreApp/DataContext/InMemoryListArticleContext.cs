@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using StoreApp.Models;
 
 namespace StoreApp.DataContext
 {
-    // TODO: make sure no methods throw
     public class InMemoryListArticleContext : IArticleContext
     {
         private int _nextId;
@@ -23,15 +23,20 @@ namespace StoreApp.DataContext
         public void DeleteArticle(int id)
         {
             var article = _articles.FirstOrDefault(a => a.Id == id);
-            if (article is not null)
-                _articles.Remove(article);
+
+            if (article is null)
+                throw new ArgumentException(nameof(id));
+
+            _articles.Remove(article);
         }
 
         public void UpdateArticle(Article article)
         {
             var articleToUpdate = _articles.FirstOrDefault(a => a.Id == article.Id);
+
             if (articleToUpdate is null)
-                return;
+                throw new ArgumentException(nameof(article));
+
             _articles[_articles.IndexOf(articleToUpdate)] = article;
         }
     }

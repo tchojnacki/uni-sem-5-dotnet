@@ -26,8 +26,9 @@ namespace StoreApp
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+            var culture = CultureInfo.GetCultureInfo("en-US");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
 
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();

@@ -31,11 +31,20 @@ namespace StoreApp.Controllers
         [HttpPost]
         public ActionResult Create(Article article)
         {
-            if (!ModelState.IsValid)
-                return View(article);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _articleContext.AddArticle(article);
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch
+            {
+                ModelState.AddModelError(string.Empty, "Error while adding the article!");
+            }
 
-            _articleContext.AddArticle(article);
-            return RedirectToAction(nameof(Index));
+            return View(article);
         }
 
         public ActionResult Edit(int? id)
@@ -57,11 +66,20 @@ namespace StoreApp.Controllers
             if (id is null)
                 return new BadRequestResult();
 
-            if (!ModelState.IsValid)
-                return View(article);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _articleContext.UpdateArticle(article);
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch
+            {
+                ModelState.AddModelError(string.Empty, "Error while updating the article!");
+            }
 
-            _articleContext.UpdateArticle(article);
-            return RedirectToAction(nameof(Index));
+            return View(article);
         }
 
         public ActionResult Delete(int? id)
@@ -83,8 +101,17 @@ namespace StoreApp.Controllers
             if (id is null)
                 return new BadRequestResult();
 
-            _articleContext.DeleteArticle((int)id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                _articleContext.DeleteArticle((int)id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                ModelState.AddModelError(string.Empty, "Error while deleting the article!");
+            }
+
+            return View(article);
         }
     }
 }
