@@ -21,14 +21,17 @@
                     Articles
                 </a>
                 <div class="navbar-dropdown">
-                        <a class="navbar-item" asp-controller="Article" asp-action="Index">
+                    <a class="navbar-item" asp-controller="Article" asp-action="Index">
                         Index
                     </a>
-                        <a class="navbar-item" asp-controller="Article" asp-action="Create">
+                    <a class="navbar-item" asp-controller="Article" asp-action="Create">
                         Create
                     </a>
                 </div>
             </div>
+        </div>
+        <div class="navbar-end">
+            @await RenderSectionAsync("NavbarEnd", required: false)
         </div>
     </div>
 </nav>

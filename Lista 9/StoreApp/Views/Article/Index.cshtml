@@ -4,7 +4,7 @@
 }
 
 <h1 class="title">Article Index</h1>
-<table class="table">
+<table class="table is-fullwidth is-striped">
     <thead>
         <tr>
             <th>
@@ -44,16 +44,16 @@
                 @Html.DisplayFor(_ => a.Category)
             </td>
             <td>
-                <div class="buttons are-small">
+                <p class="buttons are-small">
                     @Html.ActionLink("Details", "Details", new { id = a.Id }, new { @class = "button is-info" })
                     @Html.ActionLink("Edit", "Edit", new { id = a.Id }, new { @class = "button is-warning" })
                     @Html.ActionLink("Delete", "Delete", new { id = a.Id }, new { @class = "button is-danger" })
-                </div>
+                </p>
             </td>
         </tr>
 }
     </tbody>
 </table>
-<p>
+<p class="buttons">
     <a class="button is-primary" asp-action="Create">Create</a>
 </p>

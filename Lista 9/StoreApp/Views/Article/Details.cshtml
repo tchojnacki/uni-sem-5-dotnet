@@ -1,48 +1,40 @@
 ﻿@model StoreApp.Models.Article
-
 @{
-    ViewData["Title"] = "Details";
+    ViewBag.Title = $"Article #{Model.Id}";
 }
 
-<h1>Details</h1>
+<h1 class="title">Article #@Model.Id</h1>
+<table class="table is-bordered">
+    <tr>
+        <th>@Html.DisplayNameFor(a => a.Id)</th>
+        <td>@Html.DisplayFor(a => a.Id)</td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(a => a.Name)</th>
+        <td>@Html.DisplayFor(a => a.Name)</td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(a => a.Price)</th>
+        <td>@Html.DisplayFor(a => a.Price)</td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(a => a.ExpirationDate)</th>
+        <td>@Html.DisplayFor(a => a.ExpirationDate)</td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(a => a.Category)</th>
+        <td>@Html.DisplayFor(a => a.Category)</td>
+    </tr>
+</table>
+<p class="buttons">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "button is-warning" })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "button is-danger" })
+</p>
 
-<div>
-    <h4>Article</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExpiryDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExpiryDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+@section NavbarEnd {
+    <div class="navbar-item">
+        <div class="buttons">
+            <a class="button is-light" asp-action="Index">Back</a>
+        </div>
+    </div>
+}
