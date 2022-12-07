@@ -1,53 +1,71 @@
 ﻿@model StoreApp.Models.Article
-
 @{
-    ViewData["Title"] = "Edit";
+    ViewBag.Title = $"Edit Article #{Model.Id}";
 }
 
-<h1>Edit</h1>
-
-<h4>Article</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="columns">
+    <div class="box column is-half is-offset-one-quarter">
+        <h1 class="title">Edit Article #@Model.Id</h1>
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" disabled="disabled" />
-                <span asp-validation-for="Id" class="text-danger"></span>
+            <div class="field">
+                <label asp-for="Id" class="label"></label>
+                <p class="control">
+                    <input asp-for="Id" class="input" disabled="disabled" />
+                </p>
             </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="field">
+                <label asp-for="Name" class="label"></label>
+                <p class="control">
+                    <input asp-for="Name" class="input" />
+                </p>
+                <p class="help is-danger"><span asp-validation-for="Name"></span></p>
             </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+            <div class="field">
+                <label asp-for="Price" class="label"></label>
+                <p class="control">
+                    <div class="field has-addons">
+                        <p class="control">
+                            <span class="button">$</span>
+                        </p>
+                        <p class="control is-expanded">
+                            <input asp-for="Price" class="input"/>
+                        </p>
+                    </div>
+                </p>
+                <p class="help is-danger"><span asp-validation-for="Price"></span></p>
             </div>
-            <div class="form-group">
-                <label asp-for="ExpiryDate" class="control-label"></label>
-                <input asp-for="ExpiryDate" class="form-control" />
-                <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+            <div class="field">
+                <label asp-for="ExpirationDate" class="label"></label>
+                <p class="control">
+                    <input asp-for="ExpirationDate" class="input" type="date"/>
+                </p>
+                <p class="help is-danger"><span asp-validation-for="ExpirationDate"></span></p>
             </div>
-            <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <span asp-validation-for="Category" class="text-danger"></span>
+            <div class="field">
+                <label asp-for="Category" class="label"></label>
+                <p class="control">
+                    <div class="select">
+                        <select asp-for="Category" asp-items="Html.GetEnumSelectList<ArticleCategory>()">
+                        </select>
+                    </div>
+                </p>
+                <p class="help is-danger"><span asp-validation-for="Category"></span></p>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="field is-grouped is-grouped-centered">
+                <p class="control">
+                    <input class="button is-success" type="submit" value="Edit"/>
+                </p>
+                <p class="control">
+                    <a class="button is-light is-danger" asp-action="Index">Cancel</a>
+                </p>
             </div>
+            <div asp-validation-summary="All" class="notification is-danger is-light"></div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

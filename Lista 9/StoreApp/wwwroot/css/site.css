@@ -7,3 +7,7 @@
 .footer {
     margin-top: auto;
 }
+
+.validation-summary-valid {
+    display: none;
+}
