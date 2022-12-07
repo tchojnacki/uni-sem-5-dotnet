@@ -21,7 +21,9 @@ namespace StoreApp
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
-            services.AddSingleton<IArticleContext, InMemoryListArticleContext>();
+
+            //services.AddSingleton<IArticleContext, InMemoryListArticleContext>();
+            services.AddSingleton<IArticleContext, InMemoryDictionaryArticleContext>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
