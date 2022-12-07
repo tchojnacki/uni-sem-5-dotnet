@@ -5,28 +5,9 @@
 
 <h1 class="title">Delete Article #@Model.Id</h1>
 <h2 class="subtitle">Are you sure you want to delete this?</h2>
-<table class="table is-bordered">
-    <tr>
-        <th>@Html.DisplayNameFor(a => a.Id)</th>
-        <td>@Html.DisplayFor(a => a.Id)</td>
-    </tr>
-    <tr>
-        <th>@Html.DisplayNameFor(a => a.Name)</th>
-        <td>@Html.DisplayFor(a => a.Name)</td>
-    </tr>
-    <tr>
-        <th>@Html.DisplayNameFor(a => a.Price)</th>
-        <td>@Html.DisplayFor(a => a.Price)</td>
-    </tr>
-    <tr>
-        <th>@Html.DisplayNameFor(a => a.ExpirationDate)</th>
-        <td>@Html.DisplayFor(a => a.ExpirationDate)</td>
-    </tr>
-    <tr>
-        <th>@Html.DisplayNameFor(a => a.Category)</th>
-        <td>@Html.DisplayFor(a => a.Category)</td>
-    </tr>
-</table>
+@{
+    await Html.RenderPartialAsync("_ArticleInfo");
+}
 <form asp-action="Delete">
     <p class="buttons">
         <a class="button is-warning is-light" asp-action="Index">Cancel</a>

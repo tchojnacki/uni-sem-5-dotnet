@@ -4,28 +4,9 @@
 }
 
 <h1 class="title">Article #@Model.Id</h1>
-<table class="table is-bordered">
-    <tr>
-        <th>@Html.DisplayNameFor(a => a.Id)</th>
-        <td>@Html.DisplayFor(a => a.Id)</td>
-    </tr>
-    <tr>
-        <th>@Html.DisplayNameFor(a => a.Name)</th>
-        <td>@Html.DisplayFor(a => a.Name)</td>
-    </tr>
-    <tr>
-        <th>@Html.DisplayNameFor(a => a.Price)</th>
-        <td>@Html.DisplayFor(a => a.Price)</td>
-    </tr>
-    <tr>
-        <th>@Html.DisplayNameFor(a => a.ExpirationDate)</th>
-        <td>@Html.DisplayFor(a => a.ExpirationDate)</td>
-    </tr>
-    <tr>
-        <th>@Html.DisplayNameFor(a => a.Category)</th>
-        <td>@Html.DisplayFor(a => a.Category)</td>
-    </tr>
-</table>
+@{
+    await Html.RenderPartialAsync("_ArticleInfo");
+}
 <p class="buttons">
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "button is-warning" })
     @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "button is-danger" })
