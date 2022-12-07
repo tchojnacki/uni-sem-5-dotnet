@@ -3,7 +3,7 @@
     ViewBag.Title = $"Delete Article #{Model.Id}";
 }
 
-<h1 class="title">Delete</h1>
+<h1 class="title">Delete Article #@Model.Id</h1>
 <h2 class="subtitle">Are you sure you want to delete this?</h2>
 <table class="table is-bordered">
     <tr>
@@ -30,6 +30,6 @@
 <form asp-action="Delete">
     <p class="buttons">
         <a class="button is-warning is-light" asp-action="Index">Cancel</a>
-        <input type="submit" value="Delete" class="button is-danger"/>
+        <input type="submit" value="Delete" class="button is-danger" />
     </p>
 </form>

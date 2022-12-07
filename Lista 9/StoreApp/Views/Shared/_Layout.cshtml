@@ -3,32 +3,25 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>@ViewBag.Title | Store</title>
+    <title>@ViewBag.Title | My Store</title>
     <link rel="stylesheet" href="~/lib/bulma/css/bulma.min.css" />
     <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 <body>
 <nav class="navbar is-link" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <a class="navbar-item has-text-weight-bold">
-            Shop
+        <a class="navbar-item has-text-weight-bold is-size-5" asp-controller="Article" asp-action="Index">
+            My Store
         </a>
     </div>
     <div class="navbar-menu">
         <div class="navbar-start">
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link" asp-controller="Article" asp-action="Index">
-                    Articles
-                </a>
-                <div class="navbar-dropdown">
-                    <a class="navbar-item" asp-controller="Article" asp-action="Index">
-                        Index
-                    </a>
-                    <a class="navbar-item" asp-controller="Article" asp-action="Create">
-                        Create
-                    </a>
-                </div>
-            </div>
+            <a class="navbar-item" asp-controller="Article" asp-action="Index">
+                Article Index
+            </a>
+            <a class="navbar-item" asp-controller="Article" asp-action="Create">
+                Create Article
+            </a>
         </div>
         <div class="navbar-end">
             @await RenderSectionAsync("NavbarEnd", required: false)
