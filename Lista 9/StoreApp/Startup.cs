@@ -22,7 +22,7 @@ namespace StoreApp
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
-            //services.AddSingleton<IArticleContext, InMemoryListArticleContext>();
+            //services.AddSingleton<IArticleContext, InMemoryCollectionArticleContext>();
             services.AddSingleton<IArticleContext, InMemoryDictionaryArticleContext>();
         }
 

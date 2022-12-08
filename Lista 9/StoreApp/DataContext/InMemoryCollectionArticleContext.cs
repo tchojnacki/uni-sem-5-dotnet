@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using StoreApp.Models;
 
 namespace StoreApp.DataContext
 {
-    public class InMemoryListArticleContext : IArticleContext
+    public class InMemoryCollectionArticleContext : IArticleContext
     {
         private int _nextId;
-        private readonly List<Article> _articles = new();
+        private readonly SynchronizedCollection<Article> _articles = new();
 
         public IEnumerable<Article> GetAllArticles() => _articles;
 
@@ -16,7 +17,7 @@ namespace StoreApp.DataContext
 
         public void AddArticle(Article article)
         {
-            article.Id = _nextId++;
+            article.Id = Interlocked.Increment(ref _nextId);
             _articles.Add(article);
         }
 

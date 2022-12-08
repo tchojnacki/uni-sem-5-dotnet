@@ -1,13 +1,15 @@
 ﻿using StoreApp.Models;
 using System.Collections.Generic;
 using System;
+using System.Collections.Concurrent;
+using System.Threading;
 
 namespace StoreApp.DataContext
 {
     public class InMemoryDictionaryArticleContext : IArticleContext
     {
         private int _nextId;
-        private readonly Dictionary<int, Article> _articles = new();
+        private readonly ConcurrentDictionary<int, Article> _articles = new();
 
         public IEnumerable<Article> GetAllArticles() => _articles.Values;
 
@@ -15,7 +17,7 @@ namespace StoreApp.DataContext
 
         public void AddArticle(Article article)
         {
-            article.Id = _nextId++;
+            article.Id = Interlocked.Increment(ref _nextId);
             _articles[article.Id] = article;
         }
 
@@ -24,7 +26,7 @@ namespace StoreApp.DataContext
             if (!_articles.ContainsKey(id))
                 throw new ArgumentException(nameof(id));
 
-            _articles.Remove(id);
+            _articles.Remove(id, out _);
         }
 
         public void UpdateArticle(Article article)
