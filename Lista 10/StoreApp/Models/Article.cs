@@ -8,14 +8,12 @@ namespace StoreApp.Models
     {
         public int Id { get; set; }
 
-        [Required]
         [MinLength(3, ErrorMessage = "The field {0} must not be shorter than {1}.")]
         [MaxLength(100, ErrorMessage = "The field {0} must not be longer than {1}.")]
         public string Name { get; set; } = default!;
 
-        [Required]
         [DataType(DataType.Currency)]
-        [Column(TypeName = "decimal(16,2)")]
+        [Column(TypeName = "decimal(18,2)")]
         [Range(0.01, double.PositiveInfinity, ErrorMessage = "The field {0} must be positive.")]
         public decimal Price { get; set; }
 

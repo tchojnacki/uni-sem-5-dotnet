@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StoreApp.Data;
+using System.Globalization;
 
 namespace StoreApp
 {
@@ -34,7 +35,10 @@ namespace StoreApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // TODO: kultura
+            var culture = CultureInfo.GetCultureInfo("en-US");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

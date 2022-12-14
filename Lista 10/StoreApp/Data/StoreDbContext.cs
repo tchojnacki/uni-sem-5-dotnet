@@ -7,7 +7,8 @@ namespace StoreApp.Data
     {
         public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options) { }
 
-        public DbSet<Article> Articles { get; set; } = default!;
-        public DbSet<Category> Categories { get; set; } = default!;
+        public DbSet<Article> Articles => Set<Article>();
+
+        public DbSet<Category> Categories => Set<Category>();
     }
 }
