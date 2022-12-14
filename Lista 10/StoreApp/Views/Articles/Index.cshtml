@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StoreApp.Models.Article>
+﻿@model IEnumerable<Article>
 
 @{
     ViewBag.Title = "Articles";
@@ -36,7 +36,7 @@
                 @Html.DisplayFor(modelItem => item.Category!.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Photo)
+                <img alt="@Html.DisplayFor(modelItem => item.Name)" width="100" class="img-fluid rounded" src="@Html.DisplayFor(modelItem => item.Photo)" />
             </td>
             <td>
                 <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>

@@ -1,13 +1,12 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
+using StoreApp.Util;
 
-namespace StoreApp.Models
+namespace StoreApp.ViewModels
 {
-    public class Article
+    public class ArticleCreateViewModel
     {
-        public int Id { get; set; }
-
         [MinLength(3, ErrorMessage = "The field {0} must not be shorter than {1}.")]
         [MaxLength(100, ErrorMessage = "The field {0} must not be longer than {1}.")]
         public string Name { get; set; } = default!;
@@ -20,12 +19,7 @@ namespace StoreApp.Models
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
-        public Guid? PhotoGuid { get; set; }
-
-        public Category? Category { get; set; }
-
-        [NotMapped]
-        public string Photo =>
-            PhotoGuid is { } guid ? $"/upload/{guid}.jpg" : "/image/placeholder.jpg";
+        [AllowedExtension(".jpg")]
+        public IFormFile? Photo { get; set; }
     }
 }

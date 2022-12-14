@@ -1,4 +1,4 @@
-﻿@model StoreApp.Models.Article
+﻿@model ArticleCreateViewModel
 
 @{
     ViewBag.Title = "Create Article";
@@ -7,7 +7,7 @@
 <h2>Create Article</h2>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form enctype="multipart/form-data" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -21,7 +21,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <div class="position-relative">
+                    <input asp-for="Photo" class="form-control custom-file-input" accept=".jpg" id="preview-input" />
+                    <label class="custom-file-label">Select an image...</label>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -29,8 +36,14 @@
             </div>
         </form>
     </div>
+    <div class="col-md-8">
+        <img alt="Preview" class="rounded ml-auto" id="preview-img" />
+    </div>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        await Html.RenderPartialAsync("_PreviewScriptPartial");
+    }
 }
