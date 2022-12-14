@@ -6,26 +6,9 @@
 
 <h2>Delete Article #@Model.Id</h2>
 <p>Are you sure you want to delete this?</p>
-<dl class="row">
-    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.Name)
-    </dt>
-    <dd class = "col-sm-10">
-        @Html.DisplayFor(model => model.Name)
-    </dd>
-    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.Price)
-    </dt>
-    <dd class = "col-sm-10">
-        @Html.DisplayFor(model => model.Price)
-    </dd>
-    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.Category)
-    </dt>
-    <dd class = "col-sm-10">
-        @Html.DisplayFor(model => model.Category!.Name)
-    </dd>
-</dl>
+@{
+    await Html.RenderPartialAsync("_ArticleDetails");
+}
 <form asp-action="Delete">
     <input type="hidden" asp-for="Id" />
     <input type="submit" value="Delete" class="btn btn-danger" />

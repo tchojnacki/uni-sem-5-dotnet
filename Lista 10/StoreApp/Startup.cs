@@ -48,7 +48,7 @@ namespace StoreApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Articles}/{action=Index}/{id?}"
+                    pattern: "{controller}/{action=Index}/{id?}"
                 );
             });
         }
