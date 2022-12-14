@@ -76,6 +76,7 @@ namespace StoreApp.Controllers
                     _context.Update(category);
                     await _context.SaveChangesAsync();
                 }
+
                 return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateConcurrencyException)
@@ -112,6 +113,17 @@ namespace StoreApp.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var category = await _context.Categories.FindAsync(id);
+
+            var articleCount = await _context.Articles.Where(a => a.CategoryId == id).CountAsync();
+            if (articleCount > 0)
+            {
+                ModelState.AddModelError(
+                    string.Empty,
+                    $"This category has {articleCount} related articles. You can only delete categories with no articles."
+                );
+                return View(category);
+            }
+
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
