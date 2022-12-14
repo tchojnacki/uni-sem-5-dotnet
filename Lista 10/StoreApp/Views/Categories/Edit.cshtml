@@ -1,17 +1,14 @@
 ﻿@model StoreApp.Models.Category
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = $"Edit Category #{Model.Id}";
 }
 
-<h1>Edit</h1>
-
-<h4>Category</h4>
-<hr />
+<h1>Edit Category #@Model.Id</h1>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -20,13 +17,10 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-action="Index">Back</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

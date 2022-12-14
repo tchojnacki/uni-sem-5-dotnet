@@ -39,7 +39,6 @@ namespace StoreApp.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Price,CategoryId")] Article article)
         {
             if (ModelState.IsValid)
@@ -80,7 +79,6 @@ namespace StoreApp.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
             int id,
             [Bind("Id,Name,Price,CategoryId")] Article article
@@ -134,7 +132,6 @@ namespace StoreApp.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var article = await _context.Articles.FindAsync(id);

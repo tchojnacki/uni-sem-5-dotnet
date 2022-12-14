@@ -17,6 +17,7 @@ namespace StoreApp.Models
         [Range(0.01, double.PositiveInfinity, ErrorMessage = "The field {0} must be positive.")]
         public decimal Price { get; set; }
 
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
         public Guid? PhotoGuid { get; set; }
