@@ -1,0 +1,13 @@
+﻿@model Article
+
+@{
+    ViewBag.Title = $"Article #{Model.Id}";
+}
+
+<h2>Article #@Model.Id</h2>
+@{
+    await Html.RenderPartialAsync("_ArticleDetails");
+}
+<p>
+    <a class="btn btn-secondary" asp-action="Index" asp-route-CategoryId="@Model.CategoryId">Back</a>
+</p>

@@ -15,6 +15,9 @@ namespace StoreApp.Util
             ValidationContext validationContext
         )
         {
+            if (value is null)
+                return ValidationResult.Success!;
+
             if (value is not IFormFile file)
                 return new ValidationResult("This is not a file.");
 
