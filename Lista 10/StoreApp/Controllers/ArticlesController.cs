@@ -109,7 +109,7 @@ namespace StoreApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(
             int id,
-            [Bind("Id,Name,Price,CategoryId")] Article article
+            [Bind("Id,Name,Price,CategoryId,PhotoGuid")] Article article
         )
         {
             if (id != article.Id)
