@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
@@ -8,21 +9,35 @@ namespace WebApp.Controllers
         #region Logic
 
         public const int DefaultN = 30;
-        private static readonly Random Rand = new();
+        private readonly Random _rand = new();
 
-        private static int _n = DefaultN;
-        private static int _randValue = Rand.Next(_n);
-        private static int _guessAttempts;
-
-        private static void RerollNumber()
+        private int N
         {
-            _randValue = Rand.Next(_n);
-            _guessAttempts = 0;
+            get => HttpContext.Session.GetInt32(nameof(N)) ?? DefaultN;
+            set => HttpContext.Session.SetInt32(nameof(N), value);
         }
 
-        private static void UpdateRange(int n)
+        private int RandValue
         {
-            _n = n;
+            get => HttpContext.Session.GetInt32(nameof(RandValue)) ?? _rand.Next(N);
+            set => HttpContext.Session.SetInt32(nameof(RandValue), value);
+        }
+
+        private int GuessAttempts
+        {
+            get => HttpContext.Session.GetInt32(nameof(GuessAttempts)) ?? 0;
+            set => HttpContext.Session.SetInt32(nameof(GuessAttempts), value);
+        }
+
+        private void RerollNumber()
+        {
+            RandValue = _rand.Next(N);
+            GuessAttempts = 0;
+        }
+
+        private void UpdateRange(int n)
+        {
+            N = n;
             RerollNumber();
         }
 
@@ -43,7 +58,7 @@ namespace WebApp.Controllers
         {
             RerollNumber();
 
-            ViewBag.Range = _n;
+            ViewBag.Range = N;
 
             return View();
         }
@@ -51,20 +66,19 @@ namespace WebApp.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Guess(int guess)
         {
-            _guessAttempts++;
-            ViewBag.GuessAttempts = _guessAttempts;
+            ViewBag.GuessAttempts = ++GuessAttempts;
 
             ViewBag.ResultText = guess switch
             {
-                _ when guess < 0 || guess >= _n => "Podano liczbę spoza zakresu.",
-                _ when guess < _randValue => "Podano za małą liczbę.",
-                _ when guess > _randValue => "Podano za dużą liczbę.",
+                _ when guess < 0 || guess >= N => "Podano liczbę spoza zakresu.",
+                _ when guess < RandValue => "Podano za małą liczbę.",
+                _ when guess > RandValue => "Podano za dużą liczbę.",
                 _ => "Poprawna odpowiedź!"
             };
 
-            ViewBag.ResultClass = guess == _randValue ? "text-success" : "text-danger";
+            ViewBag.ResultClass = guess == RandValue ? "text-success" : "text-danger";
 
-            if (guess == _randValue)
+            if (guess == RandValue)
                 RerollNumber();
 
             return View();
