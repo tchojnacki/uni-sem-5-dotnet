@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StoreApp.Data;
 using StoreApp.Models;
+using StoreApp.Util;
 using StoreApp.ViewModels;
 
 namespace StoreApp.Controllers
@@ -118,19 +119,26 @@ namespace StoreApp.Controllers
         private void CookieRemoveFromCart(int articleId) =>
             Response.Cookies.Delete($"{CartCookiePrefix}{articleId}");
 
-        private IEnumerable<(Article Article, int Count)> CookieGetArticles() =>
-            Request.Cookies
-                .Where(c => c.Key.StartsWith(CartCookiePrefix))
-                .Select(
-                    c =>
-                        (
-                            Article: int.TryParse(c.Key.Replace(CartCookiePrefix, ""), out var k)
-                                ? _context.Articles.Find(k)
-                                : null,
-                            Count: int.TryParse(c.Value, out var v) ? (int?)v : null
-                        )
-                )
-                .Where(c => c is { Article: { }, Count: { } })
-                .Select(c => (c.Article!, c.Count!.Value));
+        private IEnumerable<(Article Article, int Count)> CookieGetArticles()
+        {
+            foreach (var (key, value) in Request.Cookies)
+            {
+                if (!key.StartsWith(CartCookiePrefix))
+                    continue;
+
+                var articleId = key.Replace(CartCookiePrefix, string.Empty).ParseIntOrDefault();
+                var count = value.ParseIntOrDefault();
+
+                if (articleId is null || count is null)
+                    continue;
+
+                var article = _context.Articles.Find(articleId.Value);
+
+                if (article is null)
+                    CookieRemoveFromCart(articleId.Value);
+                else
+                    yield return (article, count.Value);
+            }
+        }
     }
 }
