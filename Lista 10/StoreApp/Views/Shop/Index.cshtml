@@ -17,13 +17,13 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(a => a.Articles.First().Name)
+            @Html.DisplayNameFor(m => m.Articles.First().Name)
         </th>
         <th>
-            @Html.DisplayNameFor(a => a.Articles.First().Price)
+            @Html.DisplayNameFor(m => m.Articles.First().Price)
         </th>
         <th>
-            @Html.DisplayNameFor(a => a.Articles.First().Photo)
+            @Html.DisplayNameFor(m => m.Articles.First().Photo)
         </th>
         <th></th>
     </tr>
@@ -38,10 +38,13 @@
                 @Html.DisplayFor(_ => article.Price)
             </td>
             <td>
-                <img alt="@Html.DisplayFor(_ => article.Name)" width="100" class="img-fluid rounded" src="@Html.DisplayFor(modelItem => article.Photo)" />
+                <img alt="@Html.DisplayFor(_ => article.Name)" width="100" class="img-fluid rounded" src="@Html.DisplayFor(_ => article.Photo)" />
             </td>
             <td>
-                <a class="btn btn-info" asp-action="Details" asp-route-id="@article.Id">Details</a>
+                <form asp-action="AddToCart" asp-route-id="@article.Id" class="d-inline-block">
+                    <input type="submit" value="Add To Cart" class="btn btn-sm btn-primary" />
+                </form>
+                <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@article.Id">Details</a>
             </td>
         </tr>
     }
