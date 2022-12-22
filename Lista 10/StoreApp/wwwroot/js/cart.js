@@ -10,7 +10,9 @@ const cartBadge = document.getElementById("dyn-cart-badge");
                 body: new URLSearchParams({ __RequestVerificationToken })
             }
         ).then(() => {
-            cartBadge.innerText = parseInt(cartBadge.innerText) + 1;
+            const newItemCount = parseInt(cartBadge.innerText) + 1;
+            cartBadge.innerText = newItemCount;
+            cartBadge.dataset.text = newItemCount;
         });
     });
 });
