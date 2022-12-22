@@ -5,14 +5,10 @@
 }
 
 <h2>Cart</h2>
-@if (Model.IsEmpty)
-{
+<div id="dyn-cart-contents" data-is-empty="@Model.IsEmpty">
     <div class="alert alert-danger mx-auto w-25 text-center" role="alert">
         Koszyk jest pusty!
     </div>
-}
-else
-{
     <table class="table">
         <thead>
             <tr>
@@ -63,10 +59,10 @@ else
         <tfoot>
             <tr>
                 <th>Suma:</th>
-                <th>@Model.TotalPrice.ToString("C")</th>
+                <th id="dyn-cart-total-price">@Model.TotalPrice.ToString("C")</th>
                 <th></th>
                 <th></th>
             </tr>
         </tfoot>
     </table>
-}
+</div>

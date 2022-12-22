@@ -39,10 +39,7 @@
                             <a class="btn btn-outline-light" asp-controller="Shop" asp-action="Cart">
                                 <i class="bi bi-cart"></i>
                                 Cart
-                                @if (cartItems > 0)
-                                {
-                                    <span class="badge badge-light">@cartItems</span>
-                                }
+                                <span id="dyn-cart-badge" class="badge badge-light ml-1" data-text="@cartItems">@cartItems</span>
                             </a>
                         </li>
                     </ul>
@@ -63,6 +60,7 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/cart.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

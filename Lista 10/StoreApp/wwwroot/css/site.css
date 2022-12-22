@@ -79,3 +79,15 @@ img {
 img:not([src]) {
     display: none;
 }
+
+#dyn-cart-badge[data-text="0"] {
+    display: none;
+}
+
+#dyn-cart-contents[data-is-empty="True"] .table {
+    display: none;
+}
+
+#dyn-cart-contents[data-is-empty="False"] .alert {
+    display: none;
+}
