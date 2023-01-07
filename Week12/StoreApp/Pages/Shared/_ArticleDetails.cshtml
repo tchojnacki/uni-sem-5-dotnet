@@ -1,0 +1,28 @@
+﻿@model Article
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(a => a.Name)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(a => a.Name)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(a => a.Price)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(a => a.Price)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(a => a.Category)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(a => a.Category!.Name)
+            </dd>
+        </dl>
+    </div>
+    <div class="col-md-6">
+        <img src="@Html.DisplayFor(a => a.Photo)" alt="@Html.DisplayFor(a => a.Name)" class="rounded ml-auto" />
+    </div>
+</div>
