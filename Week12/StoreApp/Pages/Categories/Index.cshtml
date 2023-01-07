@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h2>Categories</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(c => c.Categories.First().Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model.Categories)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(_ => category.Name)
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-info" asp-page="/Categories/Details" asp-route-id="@category.Id">Details</a>
+                    <a class="btn btn-sm btn-warning" asp-page="/Categories/Edit" asp-route-id="@category.Id">Edit</a>
+                    <a class="btn btn-sm btn-danger" asp-page="/Categories/Delete" asp-route-id="@category.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    <a class="btn btn-primary" asp-page="/Categories/Create">Create</a>
+</p>

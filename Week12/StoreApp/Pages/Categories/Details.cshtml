@@ -1,0 +1,20 @@
+﻿@page "{id}"
+@model DetailsModel
+@{
+    ViewData["Title"] = $"Category #{Model.Category.Id}";
+}
+
+<h2>Category #@Model.Category.Id</h2>
+<dl class="row">
+    <dt class = "col-sm-2">
+        @Html.DisplayNameFor(c => c.Category.Name)
+    </dt>
+    <dd class = "col-sm-10">
+        @Html.DisplayFor(c => c.Category.Name)
+    </dd>
+</dl>
+<div>
+    <a class="btn btn-warning" asp-page="/Categories/Edit" asp-route-id="@Model.Category.Id">Edit</a>
+    <a class="btn btn-danger" asp-page="/Categories/Delete" asp-route-id="@Model.Category.Id">Delete</a>
+    <a class="btn btn-secondary" asp-page="/Categories/Index">Back</a>
+</div>

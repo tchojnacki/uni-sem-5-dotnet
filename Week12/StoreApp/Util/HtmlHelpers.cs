@@ -4,15 +4,11 @@ namespace StoreApp.Util
 {
     public static class HtmlHelpers
     {
-        // TODO
-        public static string IsActive(this IHtmlHelper htmlHelper, string controller)
+        public static string IsActive(this IHtmlHelper htmlHelper, string page)
         {
-            var currentAction = htmlHelper.ViewContext.RouteData.Values["action"] as string;
-            var currentController = htmlHelper.ViewContext.RouteData.Values["controller"] as string;
-
-            return currentAction == "Index" && currentController == controller
-                ? "active"
-                : string.Empty;
+            // TODO
+            var currentPage = htmlHelper.ViewContext.RouteData.Values["page"] as string;
+            return currentPage == page ? "active" : string.Empty;
         }
     }
 }
