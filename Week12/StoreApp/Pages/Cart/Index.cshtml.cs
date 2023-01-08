@@ -1,16 +1,16 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StoreApp.Models;
+using StoreApp.Services;
 using System.Collections.Generic;
 using System.Linq;
-using StoreApp.Services;
 
-namespace StoreApp.Pages.Shop
+namespace StoreApp.Pages.Cart
 {
-    public class CartModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly ICartService _cartService;
 
-        public CartModel(ICartService cartService) => _cartService = cartService;
+        public IndexModel(ICartService cartService) => _cartService = cartService;
 
         public IEnumerable<Item> Items { get; set; } = new List<Item>();
 
@@ -27,7 +27,7 @@ namespace StoreApp.Pages.Shop
         public void OnGet()
         {
             Items = _cartService
-                .GetArticlesInCart()
+                .GetAllItems()
                 .Select(c => new Item { Article = c.Article, Count = c.Count });
         }
     }

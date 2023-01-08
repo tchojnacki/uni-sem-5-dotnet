@@ -9,8 +9,8 @@
     await Html.RenderPartialAsync("_ArticleDetails", Model.Article);
 }
 <p>
-    <form asp-page="/Shop/AddToCart" asp-route-id="@Model.Article.Id" class="act-add-to-cart d-inline-block">
+    <form asp-page="/Cart/IncrementArticleCount" asp-route-id="@Model.Article.Id" class="act-add-to-cart d-inline-block">
         <input type="submit" value="Add To Cart" class="btn btn-primary" />
     </form>
-    <a class="btn btn-secondary" asp-page="/Index" asp-route-CategoryId="@Model.Article.CategoryId">Back</a>
+    <a class="btn btn-secondary" asp-page="/Shop/Index" asp-route-CategoryId="@Model.Article.CategoryId">Back</a>
 </p>

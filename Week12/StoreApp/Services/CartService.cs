@@ -32,17 +32,17 @@ namespace StoreApp.Services
             if (count > 0)
                 HttpContext?.Response.Cookies.Append(key, count.ToString(), options);
             else
-                RemoveFromCart(articleId);
+                RemoveArticle(articleId);
         }
 
-        public void IncreaseInCart(int articleId) => ChangeAmountInCart(articleId, 1);
+        public void IncrementArticleCount(int articleId) => ChangeAmountInCart(articleId, 1);
 
-        public void DecreaseInCart(int articleId) => ChangeAmountInCart(articleId, -1);
+        public void DecrementArticleCount(int articleId) => ChangeAmountInCart(articleId, -1);
 
-        public void RemoveFromCart(int articleId) =>
+        public void RemoveArticle(int articleId) =>
             HttpContext?.Response.Cookies.Delete($"{CartCookiePrefix}{articleId}");
 
-        public IEnumerable<(Article Article, int Count)> GetArticlesInCart()
+        public IEnumerable<(Article Article, int Count)> GetAllItems()
         {
             if (HttpContext is null)
                 yield break;
@@ -61,7 +61,7 @@ namespace StoreApp.Services
                 var article = _dbContext.Articles.Find(articleId.Value);
 
                 if (article is null)
-                    RemoveFromCart(articleId.Value);
+                    RemoveArticle(articleId.Value);
                 else
                     yield return (article, count.Value);
             }
