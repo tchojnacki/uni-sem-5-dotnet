@@ -43,7 +43,7 @@
                     <img alt="@Html.DisplayFor(_ => article.Name)" width="100" class="img-fluid rounded" src="@Html.DisplayFor(_ => article.Photo)" />
                 </td>
                 <td>
-                    <form asp-page-handler="AddToCart" asp-route-id="@article.Id" class="d-inline-block act-add-to-cart">
+                    <form method="post" asp-page="/Shop/AddToCart" asp-route-id="@article.Id" class="d-inline-block act-add-to-cart">
                         <input type="submit" value="Add To Cart" class="btn btn-sm btn-primary" />
                     </form>
                     <a class="btn btn-sm btn-info" asp-page="/Shop/Details" asp-route-id="@article.Id">Details</a>
@@ -52,5 +52,3 @@
         }
     </tbody>
 </table>
-
-@Html.AntiForgeryToken()

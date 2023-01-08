@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StoreApp.Data;
 using System.Globalization;
+using StoreApp.Services;
 
 namespace StoreApp
 {
@@ -17,6 +18,9 @@ namespace StoreApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+            services.AddScoped<ICartService, CartService>();
+
             services.AddRazorPages();
 
             services.AddDbContextPool<StoreDbContext>(

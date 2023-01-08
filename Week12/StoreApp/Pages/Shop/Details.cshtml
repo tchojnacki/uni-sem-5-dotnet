@@ -1,0 +1,16 @@
+﻿@page "{id}"
+@model DetailsModel
+@{
+    ViewData["Title"] = $"Article #{Model.Article.Id}";
+}
+
+<h2>Article #@Model.Article.Id</h2>
+@{
+    await Html.RenderPartialAsync("_ArticleDetails", Model.Article);
+}
+<p>
+    <form asp-page="/Shop/AddToCart" asp-route-id="@Model.Article.Id" class="act-add-to-cart d-inline-block">
+        <input type="submit" value="Add To Cart" class="btn btn-primary" />
+    </form>
+    <a class="btn btn-secondary" asp-page="/Index" asp-route-CategoryId="@Model.Article.CategoryId">Back</a>
+</p>
