@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using StoreApp.Models;
 
 namespace StoreApp.Data
 {
-    public class StoreDbContext : DbContext
+    public class StoreDbContext : IdentityDbContext
     {
         public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options) { }
 

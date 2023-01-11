@@ -35,11 +35,12 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="btn btn-outline-light" asp-controller="Cart" asp-action="Index">
+                        <partial name="_LoginPartial" />
+                        <li class="nav-item px-2">
+                            <a class="btn btn-light" asp-controller="Cart" asp-action="Index">
                                 <i class="bi bi-cart"></i>
                                 Cart
-                                <span id="dyn-cart-badge" class="badge badge-light ml-1" data-text="@cartItems">@cartItems</span>
+                                <span id="dyn-cart-badge" class="badge badge-primary ml-1" data-text="@cartItems">@cartItems</span>
                             </a>
                         </li>
                     </ul>

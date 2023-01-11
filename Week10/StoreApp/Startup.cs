@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using StoreApp.Data;
 using System.Globalization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StoreApp.Services;
 
@@ -29,9 +30,24 @@ namespace StoreApp
             services.AddDbContextPool<StoreDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("StoreDb"))
             );
+            services
+                .AddDefaultIdentity<IdentityUser>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                })
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<StoreDbContext>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            IWebHostEnvironment env,
+            RoleManager<IdentityRole> roleManager,
+            UserManager<IdentityUser> userManager
+        )
         {
             var culture = CultureInfo.GetCultureInfo("en-US");
             CultureInfo.DefaultThreadCurrentCulture = culture;
@@ -45,8 +61,11 @@ namespace StoreApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseStatusCodePages();
+
+            IdentitySeeder.SeedIdentity(roleManager, userManager).GetAwaiter().GetResult();
 
             app.UseEndpoints(endpoints =>
             {
@@ -54,6 +73,7 @@ namespace StoreApp
                     name: "default",
                     pattern: "{controller=Shop}/{action=Index}/{id?}"
                 );
+                endpoints.MapRazorPages();
             });
         }
     }
