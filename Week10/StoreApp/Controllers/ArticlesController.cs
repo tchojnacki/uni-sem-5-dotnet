@@ -44,7 +44,7 @@ namespace StoreApp.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name");
+            ViewData["Categories"] = new SelectList(_context.Categories, "Id", "Name");
             return View();
         }
 
@@ -76,7 +76,7 @@ namespace StoreApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.Categories = new SelectList(
+            ViewData["Categories"] = new SelectList(
                 _context.Categories,
                 "Id",
                 "Name",
@@ -96,7 +96,7 @@ namespace StoreApp.Controllers
             if (article is null)
                 return NotFound();
 
-            ViewBag.Categories = new SelectList(
+            ViewData["Categories"] = new SelectList(
                 _context.Categories,
                 "Id",
                 "Name",
@@ -134,7 +134,7 @@ namespace StoreApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.Categories = new SelectList(
+            ViewData["Categories"] = new SelectList(
                 _context.Categories,
                 "Id",
                 "Name",

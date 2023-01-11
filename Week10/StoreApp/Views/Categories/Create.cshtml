@@ -1,7 +1,7 @@
 ﻿@model Category
 
 @{
-    ViewBag.Title = "Create Category";
+    ViewData["Title"] = "Create Category";
 }
 
 <h2>Create Category</h2>
@@ -23,5 +23,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
 }

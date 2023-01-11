@@ -1,13 +1,11 @@
 ﻿@model Article
 
 @{
-    ViewBag.Title = $"Article #{Model.Id}";
+    ViewData["Title"] = $"Article #{Model.Id}";
 }
 
 <h2>Article #@Model.Id</h2>
-@{
-    await Html.RenderPartialAsync("_ArticleDetails");
-}
+<partial name="_ArticleDetails" />
 <p>
     <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>

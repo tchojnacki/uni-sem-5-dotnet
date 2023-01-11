@@ -1,7 +1,7 @@
 ﻿@model ArticleCreateViewModel
 
 @{
-    ViewBag.Title = "Create Article";
+    ViewData["Title"] = "Create Article";
 }
 
 <h2>Create Article</h2>
@@ -44,8 +44,6 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        await Html.RenderPartialAsync("_PreviewScriptPartial");
-    }
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="_PreviewScriptPartial" />
 }

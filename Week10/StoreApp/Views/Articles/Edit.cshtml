@@ -1,7 +1,7 @@
 ﻿@model Article
 
 @{
-    ViewBag.Title = $"Edit Article #{Model.Id}";
+    ViewData["Title"] = $"Edit Article #{Model.Id}";
 }
 
 <h2>Edit Article #@Model.Id</h2>
@@ -38,5 +38,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
 }

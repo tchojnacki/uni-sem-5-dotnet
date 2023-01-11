@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using StoreApp.Data;
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
+using StoreApp.Services;
 
 namespace StoreApp
 {
@@ -18,6 +19,9 @@ namespace StoreApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+            services.AddScoped<ICartService, CartService>();
+
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());

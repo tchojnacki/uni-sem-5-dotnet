@@ -1,15 +1,13 @@
 ﻿@model Article
 
 @{
-    ViewBag.Title = $"Article #{Model.Id}";
+    ViewData["Title"] = $"Article #{Model.Id}";
 }
 
 <h2>Article #@Model.Id</h2>
-@{
-    await Html.RenderPartialAsync("_ArticleDetails");
-}
+<partial name="_ArticleDetails" />
 <p>
-    <form asp-action="AddToCart" asp-route-id="@Model.Id" class="d-inline-block">
+    <form asp-controller="Cart" asp-action="IncrementArticleCount" asp-route-id="@Model.Id" class="d-inline-block act-add-to-cart">
         <input type="submit" value="Add To Cart" class="btn btn-primary" />
     </form>
     <a class="btn btn-secondary" asp-action="Index" asp-route-CategoryId="@Model.CategoryId">Back</a>
