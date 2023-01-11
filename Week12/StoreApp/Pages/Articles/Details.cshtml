@@ -1,13 +1,11 @@
-﻿@page "{id}"
+﻿@page "{id:int}"
 @model DetailsModel
 @{
     ViewData["Title"] = $"Article #{Model.Article.Id}";
 }
 
 <h2>Article #@Model.Article.Id</h2>
-@{
-    await Html.RenderPartialAsync("_ArticleDetails", Model.Article);
-}
+<partial name="Shared/_ArticleDetails" for="Article" />
 <p>
     <a class="btn btn-warning" asp-page="/Articles/Edit" asp-route-id="@Model.Article.Id">Edit</a>
     <a class="btn btn-danger" asp-page="/Articles/Delete" asp-route-id="@Model.Article.Id">Delete</a>

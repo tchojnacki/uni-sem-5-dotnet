@@ -42,11 +42,8 @@ namespace StoreApp.Pages.Articles
         public string Photo =>
             PhotoGuid is { } guid ? $"/upload/{guid}.jpg" : "/image/placeholder.jpg";
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id is null)
-                return NotFound();
-
             var article = await _context.Articles.FindAsync(id);
 
             if (article is null)
@@ -70,7 +67,7 @@ namespace StoreApp.Pages.Articles
         public async Task<IActionResult> OnPostAsync(int id)
         {
             if (id != Id)
-                return NotFound();
+                return BadRequest();
 
             if (ModelState.IsValid)
             {

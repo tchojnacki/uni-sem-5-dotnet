@@ -15,11 +15,8 @@ namespace StoreApp.Pages.Shop
 
         public Article Article { get; set; } = default!;
 
-        public async Task<IActionResult> OnGet(int? id)
+        public async Task<IActionResult> OnGet(int id)
         {
-            if (id is null)
-                return NotFound();
-
             var article = await _context.Articles
                 .Include(a => a.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);

@@ -17,11 +17,8 @@ namespace StoreApp.Pages.Categories
         [BindProperty]
         public Category Category { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id is null)
-                return NotFound();
-
             var category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
 
             if (category is null)
@@ -31,7 +28,7 @@ namespace StoreApp.Pages.Categories
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             var category = await _context.Categories.FindAsync(id);
 

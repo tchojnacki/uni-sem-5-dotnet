@@ -25,11 +25,8 @@ namespace StoreApp.Pages.Articles
         [BindProperty]
         public Article Article { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id is null)
-                return NotFound();
-
             var article = await _context.Articles
                 .Include(a => a.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -41,7 +38,7 @@ namespace StoreApp.Pages.Articles
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             var article = await _context.Articles.FindAsync(id);
 

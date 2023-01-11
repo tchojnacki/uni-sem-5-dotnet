@@ -1,4 +1,4 @@
-﻿@page "{id}"
+﻿@page "{id:int}"
 @model EditModel
 @{
     ViewData["Title"] = $"Edit Article #{Model.Id}";
@@ -38,7 +38,5 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <partial name="Shared/_ValidationScriptsPartial" />
 }

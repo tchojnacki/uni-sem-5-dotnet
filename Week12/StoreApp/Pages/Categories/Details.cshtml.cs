@@ -15,11 +15,8 @@ namespace StoreApp.Pages.Categories
 
         public Category Category { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id is null)
-                return NotFound();
-
             var category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
 
             if (category is null)
