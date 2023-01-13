@@ -1,4 +1,5 @@
-﻿@model StoreIndexViewModel
+﻿@using StoreApp.Data
+@model StoreIndexViewModel
 
 <div class="row">
     <form class="col-sm-6 offset-sm-3">
@@ -41,9 +42,12 @@
                 <img alt="@Html.DisplayFor(_ => article.Name)" width="100" class="img-fluid rounded" src="@Html.DisplayFor(_ => article.Photo)" />
             </td>
             <td>
-                <form asp-controller="Cart" asp-action="IncrementArticleCount" asp-route-id="@article.Id" class="d-inline-block act-add-to-cart">
-                    <input type="submit" value="Add To Cart" class="btn btn-sm btn-primary" />
-                </form>
+                @if (!User.IsInRole(Role.Admin))
+                {
+                    <form asp-controller="Cart" asp-action="IncrementArticleCount" asp-route-id="@article.Id" class="d-inline-block act-add-to-cart">
+                        <input type="submit" value="Add To Cart" class="btn btn-sm btn-primary" />
+                    </form>
+                }
                 <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@article.Id">Details</a>
             </td>
         </tr>

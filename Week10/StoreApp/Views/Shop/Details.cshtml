@@ -1,4 +1,5 @@
-﻿@model Article
+﻿@using StoreApp.Data
+@model Article
 
 @{
     ViewData["Title"] = $"Article #{Model.Id}";
@@ -7,8 +8,11 @@
 <h2>Article #@Model.Id</h2>
 <partial name="_ArticleDetails" />
 <p>
-    <form asp-controller="Cart" asp-action="IncrementArticleCount" asp-route-id="@Model.Id" class="d-inline-block act-add-to-cart">
-        <input type="submit" value="Add To Cart" class="btn btn-primary" />
-    </form>
+    @if (!User.IsInRole(Role.Admin))
+    {
+        <form asp-controller="Cart" asp-action="IncrementArticleCount" asp-route-id="@Model.Id" class="d-inline-block act-add-to-cart">
+            <input type="submit" value="Add To Cart" class="btn btn-primary" />
+        </form>
+    }
     <a class="btn btn-secondary" asp-action="Index" asp-route-CategoryId="@Model.CategoryId">Back</a>
 </p>

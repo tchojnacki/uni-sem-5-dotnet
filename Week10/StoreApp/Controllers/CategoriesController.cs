@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StoreApp.Data;
@@ -7,6 +8,7 @@ using StoreApp.Models;
 
 namespace StoreApp.Controllers
 {
+    [Authorize(Roles = Role.Admin)]
     public class CategoriesController : Controller
     {
         private readonly StoreDbContext _context;

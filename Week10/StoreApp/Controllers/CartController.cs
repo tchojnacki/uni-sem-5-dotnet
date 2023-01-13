@@ -1,10 +1,13 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using StoreApp.Data;
 using StoreApp.Services;
+using StoreApp.Util;
 using StoreApp.ViewModels;
 
 namespace StoreApp.Controllers
 {
+    [Deny(Roles = Role.Admin)]
     public class CartController : Controller
     {
         private readonly ICartService _cartService;

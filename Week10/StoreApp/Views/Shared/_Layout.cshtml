@@ -1,4 +1,6 @@
-﻿@{
+﻿@using StoreApp.Data
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@{
     var cookies = Context.Request.Cookies;
     var cartItems = cookies.Keys
         .Where(k => k.StartsWith("article"))
@@ -18,31 +20,33 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
                 <a asp-controller="Shop" asp-action="Index" class="navbar-brand">My Store</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link @Html.IsActive("Articles")" asp-controller="Articles" asp-action="Index">Articles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @Html.IsActive("Categories")" asp-controller="Categories" asp-action="Index">Categories</a>
-                        </li>
+                        @if (User.IsInRole(Role.Admin))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @Html.IsActive("Articles")" asp-controller="Articles" asp-action="Index">Articles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @Html.IsActive("Categories")" asp-controller="Categories" asp-action="Index">Categories</a>
+                            </li>
+                        }
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <partial name="_LoginPartial" />
-                        <li class="nav-item px-2">
-                            <a class="btn btn-light" asp-controller="Cart" asp-action="Index">
-                                <i class="bi bi-cart"></i>
-                                Cart
-                                <span id="dyn-cart-badge" class="badge badge-primary ml-1" data-text="@cartItems">@cartItems</span>
-                            </a>
-                        </li>
+                        @if (!User.IsInRole(Role.Admin))
+                        {
+                            <li class="nav-item px-2">
+                                <a class="btn btn-light" asp-controller="Cart" asp-action="Index">
+                                    <i class="bi bi-cart"></i>
+                                    Cart
+                                    <span id="dyn-cart-badge" class="badge badge-primary ml-1" data-text="@cartItems">@cartItems</span>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
