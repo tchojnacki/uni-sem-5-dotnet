@@ -34,6 +34,12 @@
                                 <a class="nav-link @Html.IsActive("Categories")" asp-controller="Categories" asp-action="Index">Categories</a>
                             </li>
                         }
+                        @if (User.IsInRole(Role.Client))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @Html.IsActive("Orders")" asp-controller="Orders" asp-action="Index">Orders</a>
+                            </li>
+                        }
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <partial name="_LoginPartial" />

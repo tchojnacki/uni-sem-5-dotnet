@@ -69,5 +69,16 @@ namespace StoreApp.Controllers
 
             return View(order);
         }
+
+        public IActionResult Index()
+        {
+            var model = _context.Orders
+                .Include(o => o.DeliveryInfo)
+                .Include(o => o.Articles)
+                .ThenInclude(oa => oa.Article)
+                .Where(o => o.OwnerName == _userManager.GetUserName(User));
+
+            return View(model);
+        }
     }
 }

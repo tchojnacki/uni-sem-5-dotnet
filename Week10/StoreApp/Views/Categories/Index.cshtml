@@ -15,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var category in Model) {
+    @foreach (var category in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(_ => category.Name)
@@ -26,7 +26,7 @@
                 <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@category.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
 <p>
