@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using StoreApp.Data;
 using StoreApp.Services;
 using StoreApp.Util;
-using StoreApp.ViewModels;
 
 namespace StoreApp.Controllers
 {
@@ -14,16 +12,7 @@ namespace StoreApp.Controllers
 
         public CartController(ICartService cartService) => _cartService = cartService;
 
-        public IActionResult Index()
-        {
-            var model = new CartViewModel
-            {
-                Items = _cartService
-                    .GetAllItems()
-                    .Select(c => new CartViewModel.Item { Article = c.Article, Count = c.Count })
-            };
-            return View(model);
-        }
+        public IActionResult Index() => View(_cartService.GetCart());
 
         [HttpPost]
         public IActionResult IncrementArticleCount(int? id)

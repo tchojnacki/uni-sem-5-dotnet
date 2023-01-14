@@ -5,10 +5,14 @@
 }
 
 <h2>Cart</h2>
-<div id="dyn-cart-contents" data-is-empty="@Model.IsEmpty">
+@if (Model.IsEmpty)
+{
     <div class="alert alert-danger mx-auto w-25 text-center" role="alert">
         Koszyk jest pusty!
     </div>
+}
+else
+{
     <table class="table">
         <thead>
             <tr>
@@ -58,14 +62,20 @@
         </tbody>
         <tfoot>
             <tr>
-                <th>Suma:</th>
-                <th>@Model.TotalPrice.ToString("C")</th>
+                <th>@Html.DisplayNameFor(m => m.TotalPrice):</th>
+                <th>@Html.DisplayFor(m => m.TotalPrice)</th>
                 <th></th>
                 <th></th>
             </tr>
         </tfoot>
     </table>
-</div>
+    <div class="clearfix">
+        <a class="btn btn-primary float-right" asp-controller="Orders" asp-action="Submit">
+            Dalej...
+        </a>
+    </div>
+}
+
 
 @section Scripts {
     <script>updateBadge();</script>

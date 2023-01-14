@@ -1,0 +1,76 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = $"Order #{Model.Id}";
+}
+
+<h2>Order #@Model.Id</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Articles.First().Article!.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Articles.First().Article!.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Articles.First().Article!.Photo)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Articles)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(_ => item.Article!.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(_ => item.Article!.Price) &times; @Html.DisplayFor(_ => item.Count) = @Html.DisplayFor(_ => item.Price)
+                        </td>
+                        <td>
+                            <img alt="@Html.DisplayFor(_ => item.Article!.Name)" width="50" class="img-fluid rounded" src="@Html.DisplayFor(_ => item.Article!.Photo)" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.TotalPrice):</th>
+                    <th>@Html.DisplayFor(m => m.TotalPrice)</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.DeliveryInfo.FullName)</th>
+                    <td>@Html.DisplayFor(m => m.DeliveryInfo.FullName)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.OwnerName)</th>
+                    <td>@Html.DisplayFor(m => m.OwnerName)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.DeliveryInfo.PhoneNumber)</th>
+                    <td>@Html.DisplayFor(m => m.DeliveryInfo.PhoneNumber)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.DeliveryInfo.Address)</th>
+                    <td style="white-space: pre-wrap;">@Html.DisplayFor(m => m.DeliveryInfo.Address)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.PaymentType)</th>
+                    <td>@Html.DisplayFor(m => m.PaymentType)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

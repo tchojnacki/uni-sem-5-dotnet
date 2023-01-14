@@ -1,0 +1,121 @@
+﻿@using StoreApp.Services
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model Order
+@inject ICartService CartService
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Submit Order";
+    var cart = CartService.GetCart();
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(_ => cart.Items.First().Article.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(_ => cart.Items.First().Article.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(_ => cart.Items.First().Article.Photo)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in cart.Items)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(_ => item.Article.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(_ => item.Article.Price) &times; @Html.DisplayFor(_ => item.Count) = @Html.DisplayFor(_ => item.Price)
+                        </td>
+                        <td>
+                            <img alt="@Html.DisplayFor(_ => item.Article.Name)" width="50" class="img-fluid rounded" src="@Html.DisplayFor(_ => item.Article.Photo)" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>@Html.DisplayNameFor(_ => cart.TotalPrice):</th>
+                    <th>@Html.DisplayFor(_ => cart.TotalPrice)</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <form asp-action="Submit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DeliveryInfo.FullName" class="control-label"></label>
+                <input asp-for="DeliveryInfo.FullName" class="form-control" />
+                <span asp-validation-for="DeliveryInfo.FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Email" class="control-label">Email</label>
+                <input id="Email" name="Email" value="@UserManager.GetUserName(User)" disabled class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryInfo.PhoneNumber" class="control-label"></label>
+                <input asp-for="DeliveryInfo.PhoneNumber" class="form-control" />
+                <span asp-validation-for="DeliveryInfo.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryInfo.Country" class="control-label"></label>
+                <input asp-for="DeliveryInfo.Country" class="form-control" />
+                <span asp-validation-for="DeliveryInfo.Country" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="DeliveryInfo.PostalCode" class="control-label"></label>
+                    <input asp-for="DeliveryInfo.PostalCode" class="form-control" />
+                    <span asp-validation-for="DeliveryInfo.PostalCode" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-8">
+                    <label asp-for="DeliveryInfo.City" class="control-label"></label>
+                    <input asp-for="DeliveryInfo.City" class="form-control" />
+                    <span asp-validation-for="DeliveryInfo.City" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryInfo.Street" class="control-label"></label>
+                <input asp-for="DeliveryInfo.Street" class="form-control" />
+                <span asp-validation-for="DeliveryInfo.Street" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="DeliveryInfo.HouseNumber" class="control-label"></label>
+                    <input asp-for="DeliveryInfo.HouseNumber" class="form-control" />
+                    <span asp-validation-for="DeliveryInfo.HouseNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="DeliveryInfo.ApartmentNumber" class="control-label"></label>
+                    <input asp-for="DeliveryInfo.ApartmentNumber" class="form-control" />
+                    <span asp-validation-for="DeliveryInfo.ApartmentNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentType" class="control-label"></label>
+                <select asp-for="PaymentType" class="form-control" asp-items="Html.GetEnumSelectList<PaymentType>()">
+                    <option disabled selected value=""></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-action="Index" asp-controller="Cart">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,5 +1,4 @@
-﻿using StoreApp.Models;
-using System.Collections.Generic;
+﻿using StoreApp.ViewModels;
 
 namespace StoreApp.Services
 {
@@ -11,6 +10,8 @@ namespace StoreApp.Services
 
         public void RemoveArticle(int articleId);
 
-        public IEnumerable<(Article Article, int Count)> GetAllItems();
+        public void ClearAll();
+
+        public CartViewModel GetCart();
     }
 }

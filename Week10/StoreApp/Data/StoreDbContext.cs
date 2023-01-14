@@ -11,5 +11,17 @@ namespace StoreApp.Data
         public DbSet<Article> Articles => Set<Article>();
 
         public DbSet<Category> Categories => Set<Category>();
+
+        public DbSet<Order> Orders => Set<Order>();
+
+        public DbSet<OrderArticle> OrderArticles => Set<OrderArticle>();
+
+        public DbSet<DeliveryInfo> DeliveryInfos => Set<DeliveryInfo>();
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<OrderArticle>().HasKey(c => new { c.ArticleId, c.OrderId });
+        }
     }
 }

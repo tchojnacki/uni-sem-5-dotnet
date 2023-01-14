@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using StoreApp.Data;
-using StoreApp.Models;
 using StoreApp.Util;
+using StoreApp.ViewModels;
 
 namespace StoreApp.Services
 {
@@ -42,7 +42,15 @@ namespace StoreApp.Services
         public void RemoveArticle(int articleId) =>
             HttpContext?.Response.Cookies.Delete($"{CartCookiePrefix}{articleId}");
 
-        public IEnumerable<(Article Article, int Count)> GetAllItems()
+        public void ClearAll()
+        {
+            foreach (var item in GetCartItems())
+                RemoveArticle(item.Article.Id);
+        }
+
+        public CartViewModel GetCart() => new() { Items = GetCartItems() };
+
+        private IEnumerable<CartViewModel.Item> GetCartItems()
         {
             if (HttpContext is null)
                 yield break;
@@ -63,7 +71,7 @@ namespace StoreApp.Services
                 if (article is null)
                     RemoveArticle(articleId.Value);
                 else
-                    yield return (article, count.Value);
+                    yield return new CartViewModel.Item { Article = article, Count = count.Value };
             }
         }
     }
