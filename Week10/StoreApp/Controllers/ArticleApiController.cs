@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StoreApp.Data;
 using StoreApp.DTOs;
 using StoreApp.Services;
+using StoreApp.Util;
 
 namespace StoreApp.Controllers
 {
@@ -35,18 +38,22 @@ namespace StoreApp.Controllers
         /// <summary>
         /// Creates a new Article.
         /// </summary>
+        [AdminOnlyEndpoint]
         [HttpPost("")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public ActionResult<ArticleDto> Post([FromBody] CreateArticleDto dto) =>
             _repository.Add(dto);
 
         /// <summary>
         /// Updates a specific Article.
         /// </summary>
+        [AdminOnlyEndpoint]
         [HttpPut("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ArticleDto> Put([FromBody] UpdateArticleDto dto) =>
             _repository.Update(dto);
@@ -54,8 +61,10 @@ namespace StoreApp.Controllers
         /// <summary>
         /// Deletes a specific Article.
         /// </summary>
+        [AdminOnlyEndpoint]
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult Delete(int id) => _repository.Delete(id);
     }
