@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Mapster;
+using Microsoft.AspNetCore.Mvc;
 using StoreApp.Data;
+using StoreApp.DTOs;
 using StoreApp.Models;
 
 namespace StoreApp.Services
 {
-    public class ArticleRepository : IRepository<Article>
+    public interface IArticleRepository
+        : IRepository<ArticleDto, CreateArticleDto, UpdateArticleDto> { }
+
+    public class ArticleRepository : IArticleRepository
     {
         private readonly StoreDbContext _context;
         private readonly IPhotoService _photoService;
@@ -16,38 +22,56 @@ namespace StoreApp.Services
             _photoService = photoService;
         }
 
-        public IEnumerable<Article> All => _context.Articles.OrderBy(a => a.Id);
+        public IEnumerable<ArticleDto> All =>
+            _context.Articles.OrderBy(a => a.Id).Adapt<IEnumerable<ArticleDto>>();
 
-        public Article? this[int id] => _context.Articles.Find(id);
+        public ActionResult<ArticleDto> this[int id] =>
+            _context.Articles.Find(id)?.Adapt<ArticleDto>() is { } dto
+                ? new OkObjectResult(dto)
+                : new NotFoundResult();
 
-        public Article Add(Article article)
+        public ActionResult<ArticleDto> Add(CreateArticleDto dto)
         {
-            article.Id = default;
-            article.PhotoGuid = default;
+            var article = dto.Adapt<Article>();
+            if (_context.Categories.Find(article.CategoryId) is null)
+                return new BadRequestResult();
+
             _context.Add(article);
             _context.SaveChanges();
-            return article;
+            return new CreatedResult($"api/articles/{article.Id}", article.Adapt<ArticleDto>());
         }
 
-        public Article Update(Article article)
+        public ActionResult<ArticleDto> Update(UpdateArticleDto dto)
         {
+            var article = _context.Articles.Find(dto.Id);
+            if (article is null)
+                return new NotFoundResult();
+
+            article.Name = dto.Name;
+            article.Price = dto.Price;
+            article.CategoryId = dto.CategoryId;
+
+            if (_context.Categories.Find(article.CategoryId) is null)
+                return new BadRequestResult();
+
             _context.Update(article);
             _context.SaveChanges();
-            return article;
+            return article.Adapt<ArticleDto>();
         }
 
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
             var article = _context.Articles.Find(id);
 
             if (article is null)
-                return;
+                return new NotFoundResult();
 
             if (article.PhotoGuid is { } photoGuid)
                 _photoService.RemovePhoto(photoGuid);
 
             _context.Articles.Remove(article);
             _context.SaveChanges();
+            return new NoContentResult();
         }
     }
 }

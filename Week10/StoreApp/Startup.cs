@@ -8,7 +8,6 @@ using StoreApp.Data;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using StoreApp.Models;
 using StoreApp.Services;
 
 namespace StoreApp
@@ -25,8 +24,8 @@ namespace StoreApp
 
             services.AddSingleton<IPhotoService, PhotoService>();
             services.AddScoped<ICartService, CartService>();
-            services.AddScoped<IRepository<Article>, ArticleRepository>();
-            services.AddScoped<IRepository<Category>, CategoryRepository>();
+            services.AddScoped<IArticleRepository, ArticleRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             services.AddControllersWithViews(options =>
             {
@@ -45,6 +44,7 @@ namespace StoreApp
                 })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StoreDbContext>();
+            services.AddSwaggerGen();
         }
 
         public void Configure(
@@ -59,7 +59,11 @@ namespace StoreApp
             CultureInfo.DefaultThreadCurrentUICulture = culture;
 
             if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
             else
                 app.UseHsts();
 

@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 
 namespace StoreApp.Services
 {
-    public interface IRepository<T>
+    public interface IRepository<TDto, in TCreateDto, in TUpdateDto>
     {
-        IEnumerable<T> All { get; }
+        IEnumerable<TDto> All { get; }
 
-        T? this[int id] { get; }
+        ActionResult<TDto> this[int id] { get; }
 
-        T Add(T entity);
+        ActionResult<TDto> Add(TCreateDto dto);
 
-        T Update(T entity);
+        ActionResult<TDto> Update(TUpdateDto dto);
 
-        void Delete(int id);
+        ActionResult Delete(int id);
     }
 }
