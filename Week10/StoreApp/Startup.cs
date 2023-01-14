@@ -8,6 +8,7 @@ using StoreApp.Data;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StoreApp.Models;
 using StoreApp.Services;
 
 namespace StoreApp
@@ -21,7 +22,11 @@ namespace StoreApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
+
+            services.AddSingleton<IPhotoService, PhotoService>();
             services.AddScoped<ICartService, CartService>();
+            services.AddScoped<IRepository<Article>, ArticleRepository>();
+            services.AddScoped<IRepository<Category>, CategoryRepository>();
 
             services.AddControllersWithViews(options =>
             {

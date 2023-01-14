@@ -7,7 +7,7 @@
 @inject UserManager<IdentityUser> UserManager
 @{
     ViewData["Title"] = "Submit Order";
-    var cart = CartService.GetCart();
+    var cart = CartService.Cart;
 }
 
 <div class="row">

@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StoreApp.Data;
 using StoreApp.Models;
+using StoreApp.Services;
 using StoreApp.ViewModels;
 
 namespace StoreApp.Controllers
@@ -18,16 +16,16 @@ namespace StoreApp.Controllers
     public class ArticlesController : Controller
     {
         private readonly StoreDbContext _context;
-        private readonly string _uploadPath;
+        private readonly IPhotoService _photoService;
 
-        public ArticlesController(StoreDbContext context, IWebHostEnvironment webHostEnvironment)
+        public ArticlesController(StoreDbContext context, IPhotoService photoService)
         {
             _context = context;
-            _uploadPath = Path.Combine(webHostEnvironment.WebRootPath, "upload");
+            _photoService = photoService;
         }
 
-        public async Task<IActionResult> Index() =>
-            View(await _context.Articles.Include(a => a.Category).ToListAsync());
+        public IActionResult Index() =>
+            View(_context.Articles.Include(a => a.Category).OrderBy(a => a.Id));
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -58,12 +56,8 @@ namespace StoreApp.Controllers
             if (ModelState.IsValid)
             {
                 Guid? photoGuid = null;
-                if (articleView.Photo is { } photo)
-                {
-                    photoGuid = Guid.NewGuid();
-                    await using var stream = System.IO.File.Create(PhotoPath(photoGuid.Value));
-                    await photo.CopyToAsync(stream);
-                }
+                if (articleView.Photo is { } file)
+                    photoGuid = await _photoService.AddPhotoAsync(file);
 
                 var article = new Article
                 {
@@ -166,17 +160,11 @@ namespace StoreApp.Controllers
         {
             var article = await _context.Articles.FindAsync(id);
 
+            if (article is null)
+                return NotFound();
+
             if (article.PhotoGuid is { } photoGuid)
-            {
-                try
-                {
-                    System.IO.File.Delete(PhotoPath(photoGuid));
-                }
-                catch
-                {
-                    Debug.WriteLine("Error while deleting the file!");
-                }
-            }
+                _photoService.RemovePhoto(photoGuid);
 
             _context.Articles.Remove(article);
             await _context.SaveChangesAsync();
@@ -184,7 +172,5 @@ namespace StoreApp.Controllers
         }
 
         private bool ArticleExists(int id) => _context.Articles.Any(e => e.Id == id);
-
-        private string PhotoPath(Guid guid) => Path.Join(_uploadPath, $"{guid}.jpg");
     }
 }

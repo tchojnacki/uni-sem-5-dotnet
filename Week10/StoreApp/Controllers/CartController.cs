@@ -12,7 +12,7 @@ namespace StoreApp.Controllers
 
         public CartController(ICartService cartService) => _cartService = cartService;
 
-        public IActionResult Index() => View(_cartService.GetCart());
+        public IActionResult Index() => View(_cartService.Cart);
 
         [HttpPost]
         public IActionResult IncrementArticleCount(int? id)

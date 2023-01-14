@@ -12,6 +12,6 @@ namespace StoreApp.Services
 
         public void ClearAll();
 
-        public CartViewModel GetCart();
+        public CartViewModel Cart { get; }
     }
 }

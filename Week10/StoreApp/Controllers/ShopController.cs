@@ -21,15 +21,15 @@ namespace StoreApp.Controllers
 
             if (model.CategoryId is { } id)
             {
-                var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+                var category = await _context.Categories.FindAsync(id);
                 if (category is null)
                     return NotFound();
 
                 ViewData["Title"] = category.Name;
 
-                model.Articles = await _context.Articles
+                model.Articles = _context.Articles
                     .Where(a => a.CategoryId == id)
-                    .ToListAsync();
+                    .OrderBy(a => a.Id);
             }
 
             return View(model);

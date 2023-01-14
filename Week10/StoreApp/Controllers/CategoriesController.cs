@@ -15,14 +15,14 @@ namespace StoreApp.Controllers
 
         public CategoriesController(StoreDbContext context) => _context = context;
 
-        public async Task<IActionResult> Index() => View(await _context.Categories.ToListAsync());
+        public IActionResult Index() => View(_context.Categories.OrderBy(c => c.Id));
 
         public async Task<IActionResult> Details(int? id)
         {
             if (id is null)
                 return NotFound();
 
-            var category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
+            var category = await _context.Categories.FindAsync(id);
 
             if (category is null)
                 return NotFound();
@@ -103,7 +103,7 @@ namespace StoreApp.Controllers
             if (id is null)
                 return NotFound();
 
-            var category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
+            var category = await _context.Categories.FindAsync(id);
 
             if (category is null)
                 return NotFound();

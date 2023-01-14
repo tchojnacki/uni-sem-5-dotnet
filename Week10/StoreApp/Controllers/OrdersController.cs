@@ -30,7 +30,7 @@ namespace StoreApp.Controllers
 
         public IActionResult Submit()
         {
-            if (_cartService.GetCart().IsEmpty)
+            if (_cartService.Cart.IsEmpty)
                 return RedirectToAction("Index", "Cart");
 
             return View();
@@ -43,9 +43,8 @@ namespace StoreApp.Controllers
                 return View(model);
 
             model.OwnerName = _userManager.GetUserName(User);
-            model.Articles = _cartService
-                .GetCart()
-                .Items.Select(i => new OrderArticle { ArticleId = i.Article.Id, Count = i.Count })
+            model.Articles = _cartService.Cart.Items
+                .Select(i => new OrderArticle { ArticleId = i.Article.Id, Count = i.Count })
                 .ToList();
             _context.Add(model);
             await _context.SaveChangesAsync();
@@ -76,7 +75,8 @@ namespace StoreApp.Controllers
                 .Include(o => o.DeliveryInfo)
                 .Include(o => o.Articles)
                 .ThenInclude(oa => oa.Article)
-                .Where(o => o.OwnerName == _userManager.GetUserName(User));
+                .Where(o => o.OwnerName == _userManager.GetUserName(User))
+                .OrderBy(o => o.Id);
 
             return View(model);
         }

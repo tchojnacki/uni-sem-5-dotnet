@@ -48,7 +48,7 @@ namespace StoreApp.Services
                 RemoveArticle(item.Article.Id);
         }
 
-        public CartViewModel GetCart() => new() { Items = GetCartItems() };
+        public CartViewModel Cart => new() { Items = GetCartItems() };
 
         private IEnumerable<CartViewModel.Item> GetCartItems()
         {
