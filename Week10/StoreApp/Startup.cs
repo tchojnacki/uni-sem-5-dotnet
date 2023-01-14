@@ -9,6 +9,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StoreApp.Services;
+using System.IO;
 
 namespace StoreApp
 {
@@ -44,7 +45,12 @@ namespace StoreApp
                 })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StoreDbContext>();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(
+                options =>
+                    options.IncludeXmlComments(
+                        Path.Combine(System.AppContext.BaseDirectory, "StoreApp.xml")
+                    )
+            );
         }
 
         public void Configure(

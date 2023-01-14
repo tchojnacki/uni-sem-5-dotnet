@@ -17,21 +17,33 @@ namespace StoreApp.Controllers
 
         public ArticleApiController(IArticleRepository repository) => _repository = repository;
 
+        /// <summary>
+        /// Gets all Articles.
+        /// </summary>
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<ArticleDto> Get() => _repository.All;
 
+        /// <summary>
+        /// Gets a specific Article.
+        /// </summary>
         [HttpGet("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ArticleDto> Get(int id) => _repository[id];
 
+        /// <summary>
+        /// Creates a new Article.
+        /// </summary>
         [HttpPost("")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<ArticleDto> Post([FromBody] CreateArticleDto dto) =>
             _repository.Add(dto);
 
+        /// <summary>
+        /// Updates a specific Article.
+        /// </summary>
         [HttpPut("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -39,6 +51,9 @@ namespace StoreApp.Controllers
         public ActionResult<ArticleDto> Put([FromBody] UpdateArticleDto dto) =>
             _repository.Update(dto);
 
+        /// <summary>
+        /// Deletes a specific Article.
+        /// </summary>
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
