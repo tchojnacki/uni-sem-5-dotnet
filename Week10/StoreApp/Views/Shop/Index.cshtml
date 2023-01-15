@@ -29,7 +29,7 @@
         <th></th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="dyn-article-wrapper">
     @foreach (var article in Model.Articles) {
         <tr>
             <td>
@@ -54,3 +54,51 @@
     }
     </tbody>
 </table>
+<template id="article-template">
+    <tr>
+        <td data-article-name></td>
+        <td data-article-price></td>
+        <td>
+            <img data-article-photo width="100" class="img-fluid rounded" />
+        </td>
+        <td>
+            @if (!User.IsInRole(Role.Admin))
+            {
+                <form data-article-submit-form method="post" class="d-inline-block act-add-to-cart">
+                    <input type="submit" value="Add To Cart" class="btn btn-sm btn-primary" />
+                </form>
+            }
+            <a data-article-details-link class="btn btn-sm btn-info">Details</a>
+        </td>
+    </tr>
+</template>
+
+@section Scripts {
+    <partial name="_PaginationScriptPartial" />
+    <script>
+        paginate({
+            wrapperElement: document.getElementById("dyn-article-wrapper"),
+            urlBuilder: page => `${location.origin}/api/articles/paginated/${page}?categoryId=@Model.CategoryId`,
+            childBuilder: item => {
+                const tr = document.getElementById("article-template").content.cloneNode(true);
+                const fill = attr => {
+                    const result = tr.querySelector(`[data-article-${attr}]`);
+                    result?.removeAttribute(`data-article-${attr}`);
+                    return result;
+                }
+                fill("name").textContent = item.name;
+                fill("price").textContent = "$" + item.price;
+                const photo = fill("photo");
+                photo.src = item.photo;
+                photo.alt = item.name;
+                const form = fill("submit-form");
+                if (form) {
+                    form.action = `/Cart/IncrementArticleCount/${item.id}`;
+                    mountActAddToCart(form);
+                }
+                fill("details-link").href = `/Articles/Details/${item.id}`;
+                return tr;
+            }
+        });
+    </script>
+}

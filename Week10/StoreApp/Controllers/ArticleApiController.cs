@@ -3,6 +3,7 @@ using System.Linq;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StoreApp.Data;
 using StoreApp.DTOs;
 using StoreApp.Services;
@@ -84,6 +85,7 @@ namespace StoreApp.Controllers
                     ? context.Articles.Where(a => a.CategoryId == categoryId.Value)
                     : context.Articles
             )
+                .Include(a => a.Category)
                 .GetPage(page)
                 .Adapt<IEnumerable<ArticleDto>>();
     }

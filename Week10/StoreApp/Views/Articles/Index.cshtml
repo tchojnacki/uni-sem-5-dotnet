@@ -23,8 +23,8 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var article in Model) {
+    <tbody id="dyn-article-wrapper">
+    @foreach (var article in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(_ => article.Name)
@@ -44,9 +44,52 @@
                 <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@article.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
 <p>
     <a class="btn btn-primary" asp-action="Create">Create</a>
 </p>
+<template id="article-template">
+    <tr>
+        <td data-article-name></td>
+        <td data-article-price></td>
+        <td data-article-category-name></td>
+        <td>
+            <img data-article-photo width="100" class="img-fluid rounded" />
+        </td>
+        <td>
+            <a data-article-details-link class="btn btn-sm btn-info">Details</a>
+            <a data-article-edit-link class="btn btn-sm btn-warning">Edit</a>
+            <a data-article-delete-link class="btn btn-sm btn-danger">Delete</a>
+        </td>
+    </tr>
+</template>
+
+@section Scripts {
+    <partial name="_PaginationScriptPartial" />
+    <script>
+        paginate({
+            wrapperElement: document.getElementById("dyn-article-wrapper"),
+            urlBuilder: page => `${location.origin}/api/articles/paginated/${page}`,
+            childBuilder: item => {
+                const tr = document.getElementById("article-template").content.cloneNode(true);
+                const fill = attr => {
+                    const result = tr.querySelector(`[data-article-${attr}]`);
+                    result.removeAttribute(`data-article-${attr}`);
+                    return result;
+                }
+                fill("name").textContent = item.name;
+                fill("price").textContent = "$" + item.price;
+                fill("category-name").textContent = item.categoryName;
+                const photo = fill("photo");
+                photo.src = item.photo;
+                photo.alt = item.name;
+                fill("details-link").href = `/Articles/Details/${item.id}`;
+                fill("edit-link").href = `/Articles/Edit/${item.id}`;
+                fill("delete-link").href = `/Articles/Delete/${item.id}`;
+                return tr;
+            }
+        });
+    </script>
+}

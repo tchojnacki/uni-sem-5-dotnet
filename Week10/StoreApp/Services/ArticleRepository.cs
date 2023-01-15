@@ -2,6 +2,7 @@
 using System.Linq;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StoreApp.Data;
 using StoreApp.DTOs;
 using StoreApp.Models;
@@ -23,10 +24,17 @@ namespace StoreApp.Services
         }
 
         public IEnumerable<ArticleDto> All =>
-            _context.Articles.OrderBy(a => a.Id).Adapt<IEnumerable<ArticleDto>>();
+            _context.Articles
+                .Include(a => a.Category)
+                .OrderBy(a => a.Id)
+                .Adapt<IEnumerable<ArticleDto>>();
 
         public ActionResult<ArticleDto> this[int id] =>
-            _context.Articles.Find(id)?.Adapt<ArticleDto>() is { } dto
+            _context.Articles
+                .Include(a => a.Category)
+                .FirstOrDefault(a => a.Id == id)
+                ?.Adapt<ArticleDto>()
+                is { } dto
                 ? new OkObjectResult(dto)
                 : new NotFoundResult();
 
