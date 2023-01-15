@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
+using System.Linq;
+using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StoreApp.Data;
@@ -67,5 +68,23 @@ namespace StoreApp.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult Delete(int id) => _repository.Delete(id);
+
+        /// <summary>
+        /// Gets a specific page of Articles for lazy loading.
+        /// </summary>
+        [HttpGet("paginated/{page:int:min(0)}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IEnumerable<ArticleDto> Page(
+            [FromServices] StoreDbContext context,
+            int page,
+            int? categoryId
+        ) =>
+            (
+                categoryId.HasValue
+                    ? context.Articles.Where(a => a.CategoryId == categoryId.Value)
+                    : context.Articles
+            )
+                .GetPage(page)
+                .Adapt<IEnumerable<ArticleDto>>();
     }
 }

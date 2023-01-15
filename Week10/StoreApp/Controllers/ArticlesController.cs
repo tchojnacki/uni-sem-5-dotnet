@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using StoreApp.Data;
 using StoreApp.Models;
 using StoreApp.Services;
+using StoreApp.Util;
 using StoreApp.ViewModels;
 
 namespace StoreApp.Controllers
@@ -24,8 +25,7 @@ namespace StoreApp.Controllers
             _photoService = photoService;
         }
 
-        public IActionResult Index() =>
-            View(_context.Articles.Include(a => a.Category).OrderBy(a => a.Id));
+        public IActionResult Index() => View(_context.Articles.Include(a => a.Category).GetPage());
 
         public async Task<IActionResult> Details(int? id)
         {

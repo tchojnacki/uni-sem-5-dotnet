@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StoreApp.Data;
+using StoreApp.Util;
 using StoreApp.ViewModels;
 
 namespace StoreApp.Controllers
@@ -27,9 +28,7 @@ namespace StoreApp.Controllers
 
                 ViewData["Title"] = category.Name;
 
-                model.Articles = _context.Articles
-                    .Where(a => a.CategoryId == id)
-                    .OrderBy(a => a.Id);
+                model.Articles = _context.Articles.Where(a => a.CategoryId == id).GetPage();
             }
 
             return View(model);
